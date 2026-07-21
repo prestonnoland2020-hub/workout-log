@@ -12,6 +12,7 @@
   <meta name="apple-mobile-web-app-title" content="Workout Log">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#5F6F63">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
   <style>
     :root {
       --gold: #C9A227;
@@ -25,18 +26,23 @@
       --ink-soft: #6B6259;
     }
     * { box-sizing: border-box; }
+    html {
+      overscroll-behavior-y: contain;
+    }
     body {
       font-family: -apple-system, Roboto, Helvetica, Arial, sans-serif;
       margin: 0;
       background: var(--cream);
       color: var(--ink);
       -webkit-tap-highlight-color: transparent;
+      overscroll-behavior-y: contain;
     }
     .brand-font { font-family: 'Montserrat', -apple-system, sans-serif; letter-spacing: 0.4px; }
     header {
       background: var(--sage);
       color: white;
       padding: 16px;
+      padding-top: calc(16px + env(safe-area-inset-top));
       font-size: 19px;
       font-weight: 700;
       font-family: 'Montserrat', -apple-system, sans-serif;
@@ -266,7 +272,7 @@
     .add-new-row .btn { width: auto; padding: 10px 14px; flex-shrink: 0; }
 
     .toast {
-      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      position: fixed; bottom: calc(24px + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%);
       background: var(--ink); color: white; padding: 10px 18px; border-radius: 20px;
       font-size: 14px; opacity: 0; transition: opacity 0.25s; pointer-events: none;
     }
@@ -487,13 +493,11 @@
       document.getElementById('switchBtn').style.display = 'none';
       document.getElementById('kpiBtn').style.display = 'none';
       document.getElementById('aiBtn').style.display = 'none';
-      google.script.run.withFailureHandler(showError).withSuccessHandler(function(names) {
-        sheetNames = names;
-        google.script.run.withFailureHandler(showError).withSuccessHandler(function(opts) {
-          options = opts;
-          showPersonSelect();
-        }).getDropdownOptions();
-      }).getSheetNames();
+      google.script.run.withFailureHandler(showError).withSuccessHandler(function(data) {
+        sheetNames = data.sheetNames;
+        options = data.options;
+        showPersonSelect();
+      }).getInitialData();
     }
 
     function showPersonSelect() {
@@ -519,14 +523,12 @@
       calMonth = new Date(today.getFullYear(), today.getMonth(), 1);
       const app = document.getElementById('app');
       app.innerHTML = '<div class="loading">Loading...</div>';
-      google.script.run.withFailureHandler(showError).withSuccessHandler(function(list) {
-        dayList = list;
-        dayListCache[name] = list;
-        google.script.run.withFailureHandler(showError).withSuccessHandler(function(rowIndex) {
-          todayRowIndex = rowIndex;
-          showHome();
-        }).findTodayRowIndex(currentSheet);
-      }).getDayList(currentSheet);
+      google.script.run.withFailureHandler(showError).withSuccessHandler(function(data) {
+        dayList = data.dayList;
+        dayListCache[name] = data.dayList;
+        todayRowIndex = data.todayRowIndex;
+        showHome();
+      }).getPersonData(currentSheet);
     }
 
     // Ensures a sheet's data is cached, then calls cb(list)

@@ -400,7 +400,7 @@
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzWrQLtDKJHMO8nPucI3ak1p_s2Z3yui-DG44B0QY_Ad3vLE9613ty4EzU24ZcCdfniAw/exec';
 
     let __jsonpCounter = 0;
-    function jsonpRequest_(url, onSuccess, onFailure) {
+    function jsonpRequest_(url, onSuccess, onFailure, timeoutMs) {
       const callbackName = '__gsJsonpCb' + (__jsonpCounter++);
       const script = document.createElement('script');
       let finished = false;
@@ -436,10 +436,15 @@
         finished = true;
         cleanup();
         if (onFailure) onFailure({ message: 'Request timed out.' });
-      }, 20000);
+      }, timeoutMs || 20000);
     }
 
     function buildGoogleScriptRunShim_(apiBaseUrl) {
+      // Functions that legitimately take longer than a normal sheet read/write
+      // (e.g. round-tripping to an external AI API, which can also retry
+      // itself once or twice on transient errors) get a longer timeout here.
+      const LONG_TIMEOUT_FUNCTIONS = { getAiSuggestion: 60000 };
+
       function buildChain(onSuccess, onFailure) {
         return new Proxy({}, {
           get: function(target, prop) {
@@ -454,7 +459,7 @@
             return function() {
               const args = Array.prototype.slice.call(arguments);
               const url = apiBaseUrl + '?fn=' + encodeURIComponent(prop) + '&args=' + encodeURIComponent(JSON.stringify(args));
-              jsonpRequest_(url, onSuccess, onFailure);
+              jsonpRequest_(url, onSuccess, onFailure, LONG_TIMEOUT_FUNCTIONS[prop]);
             };
           }
         });

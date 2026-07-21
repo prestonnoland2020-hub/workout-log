@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="apple-touch-icon" href="data:image/png;base64,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">
+  <link rel="icon" type="image/png" href="data:image/png;base64,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">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Workout Log">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#5F6F63">
+  <style>
+    :root {
+      --gold: #C9A227;
+      --gold-dark: #A6851F;
+      --sage: #5F6F63;
+      --sage-light: #8FA189;
+      --blush: #E3CFC6;
+      --blush-light: #F0E2DB;
+      --cream: #F6F1E7;
+      --ink: #2A2119;
+      --ink-soft: #6B6259;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .brand-font { font-family: 'Montserrat', -apple-system, sans-serif; letter-spacing: 0.4px; }
+    header {
+      background: var(--sage);
+      color: white;
+      padding: 16px;
+      font-size: 19px;
+      font-weight: 700;
+      font-family: 'Montserrat', -apple-system, sans-serif;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    header .back {
+      cursor: pointer;
+      font-size: 22px;
+      padding: 0 6px;
+      display: none;
+    }
+    header .header-actions {
+      margin-left: auto;
+      display: flex;
+      gap: 8px;
+    }
+    header .switch {
+      font-size: 12px;
+      background: rgba(255,255,255,0.22);
+      padding: 6px 12px;
+      border-radius: 14px;
+      cursor: pointer;
+      display: none;
+      text-transform: none;
+      letter-spacing: 0.3px;
+    }
+    header .ai-icon-btn {
+      display: none;
+      width: 30px;
+      height: 30px;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.22);
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    #app { padding: 12px; max-width: 500px; margin: 0 auto; }
+
+    .loading { text-align: center; color: var(--ink-soft); padding: 40px; }
+
+    /* Person select */
+    .person-wrap { display: flex; flex-direction: column; gap: 14px; margin-top: 30px; }
+    .person-btn {
+      background: white; border: 2px solid var(--blush); border-radius: 16px;
+      padding: 28px; text-align: center; font-size: 20px; font-weight: 700;
+      font-family: 'Montserrat', -apple-system, sans-serif; letter-spacing: 0.5px;
+      cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.06); color: var(--ink);
+    }
+    .person-btn:active { background: var(--blush-light); }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
+    /* Today card */
+    .today-card { border-left: 5px solid var(--gold); }
+    .today-card .label { font-size: 12px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.5px; font-family: 'Montserrat', -apple-system, sans-serif; font-weight: 700; }
+    .today-card .date { font-size: 18px; font-weight: 700; margin: 4px 0 10px; }
+    .today-card .summary { font-size: 14px; color: var(--ink-soft); margin-bottom: 12px; min-height: 18px; }
+    .btn {
+      display: block; width: 100%; text-align: center; background: var(--gold);
+      color: var(--ink); border: none; border-radius: 10px; padding: 14px;
+      font-size: 16px; font-weight: 700; cursor: pointer;
+      font-family: 'Montserrat', -apple-system, sans-serif; letter-spacing: 0.3px;
+    }
+    .btn.secondary { background: var(--blush-light); color: var(--ink); }
+    .btn:active { opacity: 0.85; }
+
+    /* Stat tiles */
+    .section-title { font-size: 12px; color: var(--ink-soft); text-transform: uppercase; margin: 4px 4px 8px; letter-spacing: 0.8px; font-family: 'Montserrat', -apple-system, sans-serif; font-weight: 700; }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .stat-tile {
+      background: white;
+      border-radius: 12px;
+      padding: 14px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .stat-tile .v { font-size: 22px; font-weight: 800; font-family: 'Montserrat', -apple-system, sans-serif; }
+    .stat-tile .l { font-size: 12px; color: var(--ink-soft); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.4px; font-family: 'Montserrat', -apple-system, sans-serif; font-weight: 700; }
+    .stat-tile.orange .v { color: var(--gold-dark); }
+    .stat-tile.green .v { color: var(--sage); }
+    .stat-tile.blue .v { color: var(--sage-light); }
+
+    /* Jump to date */
+    .jump-card label {
+      font-size: 12px; color: var(--ink-soft); text-transform: uppercase;
+      letter-spacing: 0.5px; display: block; margin-bottom: 6px; font-family: 'Montserrat', -apple-system, sans-serif; font-weight: 700;
+    }
+    .jump-card input {
+      width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #d8dce2;
+      font-size: 15px; background: white; font-family: inherit;
+    }
+    .jump-results { margin-top: 8px; }
+    .jump-result-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 6px; border-top: 1px solid var(--cream);
+      font-size: 14px; cursor: pointer;
+    }
+    .jump-result-row:active { background: var(--blush-light); }
+    .jump-result-dots { display: flex; gap: 4px; }
+    .jump-result-dots .cal-dot { position: static; }
+    .jump-result-empty { color: var(--ink-soft); font-size: 13px; padding: 8px 6px; }
+
+    /* Calendar */
+    .cal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .cal-header .month-label { font-size: 16px; font-weight: 700; font-family: 'Montserrat', -apple-system, sans-serif; }
+    .cal-nav {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: var(--blush-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; cursor: pointer; color: var(--gold-dark);
+      user-select: none;
+    }
+    .cal-nav:active { background: var(--blush); }
+    .cal-kpi-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .cal-kpi {
+      text-align: center;
+      background: var(--cream);
+      border-radius: 10px;
+      padding: 8px 2px;
+    }
+    .cal-kpi .v { font-size: 15px; font-weight: 700; font-family: 'Montserrat', -apple-system, sans-serif; }
+    .cal-kpi .l { font-size: 10px; color: var(--ink-soft); text-transform: uppercase; font-family: 'Montserrat', -apple-system, sans-serif; font-weight: 700; letter-spacing: 0.3px; }
+    .cal-kpi.orange .v { color: var(--gold-dark); }
+    .cal-kpi.green .v { color: var(--sage); }
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+    .cal-weekday {
+      text-align: center;
+      font-size: 11px;
+      color: var(--ink-soft);
+      font-weight: 700;
+      padding-bottom: 4px;
+      font-family: 'Montserrat', -apple-system, sans-serif;
+    }
+    .cal-day {
+      aspect-ratio: 1;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      position: relative;
+      background: var(--cream);
+      color: #ccc;
+    }
+    .cal-day.empty { background: transparent; }
+    .cal-day.has-row {
+      background: white;
+      color: var(--ink);
+      cursor: pointer;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+    }
+    .cal-day.has-row:active { background: var(--blush-light); }
+    .cal-day.today { border: 2px solid var(--gold); }
+    .cal-dots { display: flex; gap: 3px; margin-top: 2px; height: 6px; }
+    .cal-dot { width: 6px; height: 6px; border-radius: 50%; }
+    .cal-dot.orange { background: var(--gold); }
+    .cal-dot.green { background: var(--sage); }
+    .cal-legend {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+    .cal-legend span { display: flex; align-items: center; gap: 5px; }
+    .cal-legend .dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    /* Form */
+    .field { margin-bottom: 14px; }
+    .field label { display: block; font-size: 13px; font-weight: 700; color: var(--ink-soft); margin-bottom: 6px; font-family: 'Montserrat', -apple-system, sans-serif; }
+    .field input, .field textarea, .field select {
+      width: 100%; padding: 12px; border: 1px solid var(--blush); border-radius: 10px;
+      font-size: 16px; background: white; font-family: inherit;
+    }
+    .field textarea { min-height: 70px; resize: vertical; }
+    .form-card .form-date { font-size: 16px; font-weight: 700; margin-bottom: 14px; color: var(--sage); font-family: 'Montserrat', -apple-system, sans-serif; }
+    .row2 { display: flex; gap: 10px; }
+    .row2 .field { flex: 1; }
+    .chip-group { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      padding: 9px 14px; border-radius: 20px; background: var(--blush-light); color: var(--ink);
+      font-size: 14px; cursor: pointer; border: 1px solid var(--blush-light); user-select: none;
+    }
+    .chip.selected { background: var(--gold); color: var(--ink); border-color: var(--gold); font-weight: 700; }
+
+    /* Growable select ("+ Add new...") */
+    .add-new-row { display: none; gap: 6px; margin-top: 8px; }
+    .add-new-row input {
+      flex: 1; padding: 10px; border: 1px solid var(--blush); border-radius: 8px;
+      font-size: 14px; background: white; font-family: inherit;
+    }
+    .add-new-row .btn { width: auto; padding: 10px 14px; flex-shrink: 0; }
+
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+      background: var(--ink); color: white; padding: 10px 18px; border-radius: 20px;
+      font-size: 14px; opacity: 0; transition: opacity 0.25s; pointer-events: none;
+    }
+    .toast.show { opacity: 1; }
+
+    /* KPI page */
+    .seg-control {
+      display: flex;
+      background: var(--blush-light);
+      border-radius: 12px;
+      padding: 4px;
+      gap: 4px;
+      margin-bottom: 12px;
+    }
+    .seg-btn {
+      flex: 1;
+      text-align: center;
+      padding: 9px 4px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 700;
+      font-family: 'Montserrat', -apple-system, sans-serif;
+      cursor: pointer;
+      color: var(--ink-soft);
+    }
+    .seg-btn.active { background: white; color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
+    .kpi-range select {
+      width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--blush);
+      font-size: 15px; background: white; margin-bottom: 14px;
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .kpi-tile { background: white; border-radius: 12px; padding: 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .kpi-tile .v { font-size: 21px; font-weight: 800; font-family: 'Montserrat', -apple-system, sans-serif; }
+    .kpi-tile .l { font-size: 11px; color: var(--ink-soft); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.4px; font-family: 'Montserrat', -apple-system, sans-serif; font-weight: 700; }
+    .kpi-tile .sub { font-size: 12px; color: var(--ink-soft); margin-top: 4px; }
+    .kpi-tile.gold .v { color: var(--gold-dark); }
+    .kpi-tile.sage .v { color: var(--sage); }
+
+    .compare-table { width: 100%; border-collapse: collapse; }
+    .compare-table th {
+      font-family: 'Montserrat', -apple-system, sans-serif; font-size: 11px; text-transform: uppercase;
+      color: var(--ink-soft); text-align: center; padding: 6px 4px; letter-spacing: 0.3px;
+    }
+    .compare-table th:first-child { text-align: left; }
+    .compare-table td { text-align: center; padding: 10px 4px; font-weight: 700; font-size: 15px; border-top: 1px solid var(--cream); }
+    .compare-table td:first-child { text-align: left; font-weight: 600; font-size: 13px; color: var(--ink-soft); font-family: -apple-system, sans-serif; }
+    .compare-table td.gold { color: var(--gold-dark); }
+    .compare-table td.sage { color: var(--sage); }
+
+    .chart-legend { display: flex; gap: 16px; justify-content: center; margin-top: 8px; font-size: 12px; color: var(--ink-soft); }
+    .chart-legend span { display: flex; align-items: center; gap: 5px; }
+    .chart-legend .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .empty-note { color: var(--ink-soft); font-size: 13px; text-align: center; padding: 20px 0; }
+
+    .freq-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .freq-label { width: 78px; font-size: 12px; color: var(--ink-soft); flex-shrink: 0; }
+    .freq-bar-track { flex: 1; height: 10px; background: var(--cream); border-radius: 6px; overflow: hidden; }
+    .freq-bar-fill { height: 100%; border-radius: 6px; }
+    .freq-count { width: 22px; text-align: right; font-size: 12px; font-weight: 700; flex-shrink: 0; font-family: 'Montserrat', -apple-system, sans-serif; }
+
+    .pr-history-date { font-size: 11px; color: var(--ink-soft); margin: -4px 0 10px 0; }
+
+    /* AI Coach chat */
+    .ai-chat-card { padding: 14px; }
+    .ai-messages { max-height: 50vh; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+    .ai-msg { padding: 10px 14px; border-radius: 14px; font-size: 14px; line-height: 1.4; max-width: 85%; white-space: pre-wrap; }
+    .ai-msg-user { background: var(--gold); color: var(--ink); align-self: flex-end; }
+    .ai-msg-bot { background: var(--cream); color: var(--ink); align-self: flex-start; }
+    .ai-empty { color: var(--ink-soft); font-size: 13px; text-align: center; padding: 20px 0; }
+    .ai-loading { color: var(--ink-soft); font-size: 13px; padding: 8px 0 0; text-align: center; }
+    .ai-input-row { display: flex; gap: 8px; }
+    .ai-input-row input {
+      flex: 1; padding: 12px; border: 1px solid var(--blush); border-radius: 10px;
+      font-size: 15px; background: white; font-family: inherit;
+    }
+    .ai-input-row .btn { width: auto; padding: 12px 16px; }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="back" id="backBtn" onclick="showHome()">&#8592;</span>
+    <span id="headerTitle">Workout Log</span>
+    <div class="header-actions" id="headerActions">
+      <span class="ai-icon-btn" id="aiBtn" onclick="openAiChat()" title="AI Coach">
+        <svg viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2.5c0.6 4.2 1.4 6.5 2.9 8 1.5 1.5 3.8 2.3 8 2.9-4.2 0.6-6.5 1.4-8 2.9-1.5 1.5-2.3 3.8-2.9 8-0.6-4.2-1.4-6.5-2.9-8-1.5-1.5-3.8-2.3-8-2.9 4.2-0.6 6.5-1.4 8-2.9 1.5-1.5 2.3-3.8 2.9-8z" fill="var(--cream)"/>
+          <path d="M19 2.4c0.24 1.1 0.5 1.75 0.95 2.2 0.45 0.45 1.1 0.7 2.2 0.95-1.1 0.24-1.75 0.5-2.2 0.95-0.45 0.45-0.7 1.1-0.95 2.2-0.24-1.1-0.5-1.75-0.95-2.2-0.45-0.45-1.1-0.7-2.2-0.95 1.1-0.24 1.75-0.5 2.2-0.95 0.45-0.45 0.7-1.1 0.95-2.2z" fill="var(--cream)"/>
+        </svg>
+      </span>
+      <span class="switch" id="kpiBtn" onclick="openKpis()">Stats</span>
+      <span class="switch" id="switchBtn" onclick="showPersonSelect()">Switch</span>
+    </div>
+  </header>
+  <div id="app">
+    <div class="loading">Loading...</div>
+  </div>
+  <div class="toast" id="toast">Saved</div>
+
+  <script>
+    /**
+     * ---------------------------------------------------------------------
+     * google.script.run SHIM — read this before touching anything below.
+     * ---------------------------------------------------------------------
+     * This file is hosted OUTSIDE Apps Script (e.g. on GitHub Pages), so the
+     * real `google.script.run` doesn't exist here — that object only appears
+     * automatically when Apps Script itself serves the page. This shim
+     * recreates the same withSuccessHandler/withFailureHandler/.functionName()
+     * shape by calling your Apps Script deployment's JSON API (the ?fn=...
+     * mode added to doGet in Code.gs) over fetch() instead. Every existing
+     * `google.script.run.withFailureHandler(...).withSuccessHandler(...).foo(...)`
+     * call below works completely unchanged against this shim.
+     *
+     * ACTION NEEDED: paste your Apps Script Web App URL (ends in /exec) below.
+     * Get it from Apps Script editor → Deploy → Manage deployments → copy
+     * the "Web app" URL.
+     */
+    const APPS_SCRIPT_URL = 'PASTE_YOUR_APPS_SCRIPT_EXEC_URL_HERE';
+
+    function buildGoogleScriptRunShim_(apiBaseUrl) {
+      function buildChain(onSuccess, onFailure) {
+        return new Proxy({}, {
+          get: function(target, prop) {
+            if (prop === 'withSuccessHandler') {
+              return function(fn) { return buildChain(fn, onFailure); };
+            }
+            if (prop === 'withFailureHandler') {
+              return function(fn) { return buildChain(onSuccess, fn); };
+            }
+            // Any other property name is treated as the remote function to call,
+            // e.g. google.script.run.withSuccessHandler(cb).getSheetNames()
+            return function() {
+              const args = Array.prototype.slice.call(arguments);
+              const url = apiBaseUrl + '?fn=' + encodeURIComponent(prop) + '&args=' + encodeURIComponent(JSON.stringify(args));
+              fetch(url)
+                .then(function(res) {
+                  if (!res.ok) throw new Error('HTTP ' + res.status);
+                  return res.json();
+                })
+                .then(function(data) {
+                  if (data.error) {
+                    if (onFailure) onFailure({ message: data.error });
+                  } else if (onSuccess) {
+                    onSuccess(data.result);
+                  }
+                })
+                .catch(function(err) {
+                  if (onFailure) onFailure({ message: 'Network error: ' + err.message });
+                });
+            };
+          }
+        });
+      }
+      return buildChain(null, null);
+    }
+
+    window.google = { script: { run: buildGoogleScriptRunShim_(APPS_SCRIPT_URL) } };
+    /* ---------------------------------------------------------------------
+     * End of shim. Everything below this line is the unmodified app code.
+     * --------------------------------------------------------------------- */
+    let sheetNames = [];
+    let currentSheet = null;
+    let dayList = [];
+    let dayListCache = {}; // sheetName -> dayList array
+    let prCache = {}; // sheetName -> PR list array
+    let todayRowIndex = null;
+    let options = { muscleGroups: [], cardioTypes: [], lifts: [] };
+    let selectedMuscles = [];
+    let calMonth = null; // Date, first-of-month, no time
+    let kpiPerson = null; // sheet name or 'compare'
+    let kpiRange = 'month';
+    let aiChatHistory = {}; // sheetName -> array of {role, text}
+
+    // Maps a growable <select> field id to which backend list it belongs to.
+    const GROWABLE_KIND = { f_cardio: 'cardio', f_prLift: 'lift' };
+    const GROWABLE_PLACEHOLDER = { f_cardio: '--', f_prLift: 'Choose a lift' };
+
+    function showError(err) {
+      const app = document.getElementById('app');
+      const msg = (err && err.message) ? err.message : String(err);
+      app.innerHTML = '<div class="loading" style="color:#c53030; text-align:left; white-space:pre-wrap;">Error:\n\n' + escapeHtml(msg) + '</div>';
+    }
+
+    function init() {
+      document.getElementById('switchBtn').style.display = 'none';
+      document.getElementById('kpiBtn').style.display = 'none';
+      document.getElementById('aiBtn').style.display = 'none';
+      google.script.run.withFailureHandler(showError).withSuccessHandler(function(names) {
+        sheetNames = names;
+        google.script.run.withFailureHandler(showError).withSuccessHandler(function(opts) {
+          options = opts;
+          showPersonSelect();
+        }).getDropdownOptions();
+      }).getSheetNames();
+    }
+
+    function showPersonSelect() {
+      currentSheet = null;
+      document.getElementById('backBtn').style.display = 'none';
+      document.getElementById('switchBtn').style.display = 'none';
+      document.getElementById('kpiBtn').style.display = 'none';
+      document.getElementById('aiBtn').style.display = 'none';
+      document.getElementById('headerTitle').textContent = 'Workout Log';
+      const app = document.getElementById('app');
+      let html = '<div class="person-wrap">';
+      sheetNames.forEach(function(name) {
+        html += '<div class="person-btn" onclick="selectPerson(\'' + escapeAttr(name) + '\')">' + escapeHtml(name) + '</div>';
+      });
+      html += '</div>';
+      app.innerHTML = html;
+    }
+
+    function selectPerson(name) {
+      currentSheet = name;
+      kpiPerson = name;
+      const today = new Date();
+      calMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+      const app = document.getElementById('app');
+      app.innerHTML = '<div class="loading">Loading...</div>';
+      google.script.run.withFailureHandler(showError).withSuccessHandler(function(list) {
+        dayList = list;
+        dayListCache[name] = list;
+        google.script.run.withFailureHandler(showError).withSuccessHandler(function(rowIndex) {
+          todayRowIndex = rowIndex;
+          showHome();
+        }).findTodayRowIndex(currentSheet);
+      }).getDayList(currentSheet);
+    }
+
+    // Ensures a sheet's data is cached, then calls cb(list)
+    function ensureSheetLoaded(name, cb) {
+      if (dayListCache[name]) { cb(dayListCache[name]); return; }
+      google.script.run.withFailureHandler(showError).withSuccessHandler(function(list) {
+        dayListCache[name] = list;
+        cb(list);
+      }).getDayList(name);
+    }
+
+    // Ensures a sheet's PR list is cached, then calls cb(list)
+    function ensurePRsLoaded(name, cb) {
+      if (prCache[name]) { cb(prCache[name]); return; }
+      google.script.run.withFailureHandler(showError).withSuccessHandler(function(list) {
+        prCache[name] = list;
+        cb(list);
+      }).getPRs(name);
+    }
+
+    /* ---------- helpers ---------- */
+
+    function hasWorkout(d) {
+      const w = String(d.workout || '').trim();
+      return w !== '' && w.toLowerCase() !== 'none';
+    }
+    function hasCardio(d) {
+      return String(d.cardio || '').trim() !== '';
+    }
+    function sameDay(dateSortable, dateObj) {
+      const d = new Date(dateSortable);
+      return d.getFullYear() === dateObj.getFullYear() &&
+             d.getMonth() === dateObj.getMonth() &&
+             d.getDate() === dateObj.getDate();
+    }
+    function mondayOf(dateObj) {
+      const d = new Date(dateObj);
+      d.setHours(0,0,0,0);
+      const jsDay = d.getDay();
+      const diff = (jsDay + 6) % 7;
+      d.setDate(d.getDate() - diff);
+      return d;
+    }
+    function formatMDY(ts) {
+      const d = new Date(ts);
+      return (d.getMonth() + 1) + '/' + d.getDate() + '/' + d.getFullYear();
+    }
+
+    function computeWeekStats() {
+      const today = new Date();
+      const weekStart = mondayOf(today);
+      const weekEnd = new Date(weekStart); weekEnd.setDate(weekStart.getDate() + 6); weekEnd.setHours(23,59,59,999);
+      let miles = 0, liftDays = 0, cardioDays = 0;
+      dayList.forEach(function(d) {
+        if (d.dateSortable >= weekStart.getTime() && d.dateSortable <= weekEnd.getTime()) {
+          if (typeof d.miles === 'number') miles += d.miles;
+          if (hasWorkout(d)) liftDays++;
+          if (hasCardio(d)) cardioDays++;
+        }
+      });
+      let latestWeight = null, latestWeightDate = null;
+      dayList.slice().sort((a,b) => b.dateSortable - a.dateSortable).some(function(d) {
+        if (typeof d.weight === 'number') { latestWeight = d.weight; latestWeightDate = d.dateSortable; return true; }
+        return false;
+      });
+      return { miles, liftDays, cardioDays, latestWeight, latestWeightDate };
+    }
+
+    function computeMonthStats(monthDate) {
+      const y = monthDate.getFullYear(), m = monthDate.getMonth();
+      let miles = 0, liftDays = 0, cardioDays = 0, weightSum = 0, weightCount = 0;
+      dayList.forEach(function(d) {
+        const dt = new Date(d.dateSortable);
+        if (dt.getFullYear() === y && dt.getMonth() === m) {
+          if (typeof d.miles === 'number') miles += d.miles;
+          if (hasWorkout(d)) liftDays++;
+          if (hasCardio(d)) cardioDays++;
+          if (typeof d.weight === 'number') { weightSum += d.weight; weightCount++; }
+        }
+      });
+      return { miles, liftDays, cardioDays, avgWeight: weightCount ? (weightSum / weightCount) : null };
+    }
+
+    /* ---------- growable select ("+ Add new...") ---------- */
+
+    function renderSelectWithAddNew(fieldId, values, selectedValue, placeholder) {
+      let optsHtml = '<option value="">' + escapeHtml(placeholder || '--') + '</option>';
+      values.forEach(function(v) {
+        const sel = v === selectedValue ? ' selected' : '';
+        optsHtml += '<option value="' + escapeAttr(v) + '"' + sel + '>' + escapeHtml(v) + '</option>';
+      });
+      optsHtml += '<option value="__add_new__">+ Add new...</option>';
+      return '<select id="' + fieldId + '" onchange="onGrowableSelectChange(\'' + fieldId + '\')">' + optsHtml + '</select>' +
+        '<div class="add-new-row" id="' + fieldId + '_addRow">' +
+          '<input type="text" id="' + fieldId + '_addInput" placeholder="Type a new value">' +
+          '<button type="button" class="btn secondary" onclick="confirmAddNew(\'' + fieldId + '\')">Add</button>' +
+        '</div>';
+    }
+
+    function onGrowableSelectChange(fieldId) {
+      const sel = document.getElementById(fieldId);
+      const addRow = document.getElementById(fieldId + '_addRow');
+      if (sel.value === '__add_new__') {
+        addRow.style.display = 'flex';
+        document.getElementById(fieldId + '_addInput').focus();
+      } else {
+        addRow.style.display = 'none';
+      }
+    }
+
+    function rebuildGrowableSelect(fieldId, values, selectedValue, placeholder) {
+      const sel = document.getElementById(fieldId);
+      let optsHtml = '<option value="">' + escapeHtml(placeholder || '--') + '</option>';
+      values.forEach(function(v) {
+        const sel2 = v === selectedValue ? ' selected' : '';
+        optsHtml += '<option value="' + escapeAttr(v) + '"' + sel2 + '>' + escapeHtml(v) + '</option>';
+      });
+      optsHtml += '<option value="__add_new__">+ Add new...</option>';
+      sel.innerHTML = optsHtml;
+    }
+
+    function confirmAddNew(fieldId) {
+      const input = document.getElementById(fieldId + '_addInput');
+      const value = input.value.trim();
+      if (!value) return;
+      const kind = GROWABLE_KIND[fieldId];
+      const fnName = kind === 'cardio' ? 'addCardioType' : 'addLift';
+      google.script.run.withFailureHandler(showError).withSuccessHandler(function(updatedList) {
+        if (kind === 'cardio') options.cardioTypes = updatedList;
+        else options.lifts = updatedList;
+        rebuildGrowableSelect(fieldId, updatedList, value, GROWABLE_PLACEHOLDER[fieldId]);
+        input.value = '';
+        document.getElementById(fieldId + '_addRow').style.display = 'none';
+      })[fnName](value);
+    }
+
+    /* ---------- home / dashboard ---------- */
+
+    function showHome() {
+      document.getElementById('backBtn').style.display = 'none';
+      document.getElementById('switchBtn').style.display = 'inline-block';
+      document.getElementById('kpiBtn').style.display = 'inline-block';
+      document.getElementById('aiBtn').style.display = 'flex';
+      document.getElementById('headerTitle').textContent = currentSheet + "'s Log";
+      const app = document.getElementById('app');
+      app.innerHTML = '';
+
+      // Today card
+      const todayCard = document.createElement('div');
+      todayCard.className = 'card today-card';
+      if (todayRowIndex) {
+        const today = dayList.find(d => d.rowIndex === todayRowIndex);
+        const summary = today && (today.workout || today.cardio)
+          ? [today.workout, today.cardio].filter(Boolean).join(' + ')
+          : 'Nothing logged yet';
+        todayCard.innerHTML =
+          '<div class="label">Today</div>' +
+          '<div class="date">' + (today ? today.dateLabel : '') + '</div>' +
+          '<div class="summary">' + summary + '</div>' +
+          '<button class="btn" onclick="openDay(' + todayRowIndex + ')">Log Today\'s Workout</button>';
+      } else {
+        todayCard.innerHTML = '<div class="label">Today</div><div class="summary">No row found for today\'s date in this sheet.</div>';
+      }
+      app.appendChild(todayCard);
+
+      // Log a PR
+      const prBtnCard = document.createElement('div');
+      prBtnCard.className = 'card';
+      prBtnCard.innerHTML =
+        '<button class="btn secondary" onclick="openPRForm()">' +
+          '<span style="display:inline-flex; align-items:center; gap:8px;">' +
+            '<svg viewBox="0 0 24 24" width="18" height="18" xmlns="http://www.w3.org/2000/svg">' +
+              '<path d="M8 5H4v3a4 4 0 0 0 4 4" fill="none" stroke="var(--gold-dark)" stroke-width="1.7" stroke-linecap="round"/>' +
+              '<path d="M16 5h4v3a4 4 0 0 1-4 4" fill="none" stroke="var(--gold-dark)" stroke-width="1.7" stroke-linecap="round"/>' +
+              '<path d="M7 4h10v5.5a5 5 0 0 1-10 0V4z" fill="var(--gold)"/>' +
+              '<rect x="10.7" y="14" width="2.6" height="3.2" fill="var(--gold-dark)"/>' +
+              '<path d="M8.3 18.3h7.4l-1 2.4H9.3l-1-2.4z" fill="var(--gold-dark)"/>' +
+              '<rect x="7.5" y="20.5" width="9" height="1.6" rx="0.8" fill="var(--gold-dark)"/>' +
+            '</svg>' +
+            '<span>Log a PR</span>' +
+          '</span>' +
+        '</button>';
+      app.appendChild(prBtnCard);
+
+      // This week stats
+      const ws = computeWeekStats();
+      const statTitle = document.createElement('div');
+      statTitle.className = 'section-title';
+      statTitle.textContent = 'This Week';
+      app.appendChild(statTitle);
+
+      const grid = document.createElement('div');
+      grid.className = 'stat-grid';
+      grid.innerHTML =
+        '<div class="stat-tile blue"><div class="v">' + ws.miles.toFixed(1) + '</div><div class="l">Miles</div></div>' +
+        '<div class="stat-tile orange"><div class="v">' + ws.liftDays + '</div><div class="l">Lift Days</div></div>' +
+        '<div class="stat-tile green"><div class="v">' + ws.cardioDays + '</div><div class="l">Cardio Days</div></div>' +
+        '<div class="stat-tile"><div class="v">' + (ws.latestWeight !== null ? ws.latestWeight : '--') + '</div><div class="l">' + (ws.latestWeightDate ? 'Weight (' + formatMDY(ws.latestWeightDate) + ')' : 'Latest Weight') + '</div></div>';
+      app.appendChild(grid);
+
+      // Calendar
+      renderCalendarSection(app);
+
+      // Jump to date (search)
+      renderJumpSearchSection(app);
+    }
+
+    function renderJumpSearchSection(app) {
+      const card = document.createElement('div');
+      card.className = 'card jump-card';
+      card.innerHTML =
+        '<label>Jump to Date</label>' +
+        '<input type="text" id="jumpSearchInput" placeholder="Search a date (e.g. Jul 15, 7/15, Monday)" autocomplete="off" oninput="onJumpSearchInput()">' +
+        '<div class="jump-results" id="jumpResults"></div>';
+      app.appendChild(card);
+    }
+
+    function onJumpSearchInput() {
+      const query = document.getElementById('jumpSearchInput').value.trim().toLowerCase();
+      const resultsEl = document.getElementById('jumpResults');
+      if (!query) { resultsEl.innerHTML = ''; return; }
+
+      const now = Date.now();
+      const matches = dayList
+        .filter(function(d) {
+          const haystack = (d.dateLabel + ' ' + formatMDY(d.dateSortable)).toLowerCase();
+          return haystack.includes(query);
+        })
+        .sort(function(a, b) { return Math.abs(a.dateSortable - now) - Math.abs(b.dateSortable - now); })
+        .slice(0, 8);
+
+      if (!matches.length) {
+        resultsEl.innerHTML = '<div class="jump-result-empty">No matching dates.</div>';
+        return;
+      }
+
+      resultsEl.innerHTML = matches.map(function(d) {
+        let dots = '';
+        if (hasWorkout(d)) dots += '<span class="cal-dot orange"></span>';
+        if (hasCardio(d)) dots += '<span class="cal-dot green"></span>';
+        return '<div class="jump-result-row" onclick="openDay(' + d.rowIndex + ')">' +
+          '<span>' + escapeHtml(d.dateLabel) + '</span>' +
+          '<span class="jump-result-dots">' + dots + '</span>' +
+        '</div>';
+      }).join('');
+    }
+
+    function renderCalendarSection(app) {
+      const ms = computeMonthStats(calMonth);
+      const monthLabel = calMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      let html = '<div class="cal-header">' +
+        '<div class="cal-nav" onclick="shiftMonth(-1)">&#8249;</div>' +
+        '<div class="month-label">' + monthLabel + '</div>' +
+        '<div class="cal-nav" onclick="shiftMonth(1)">&#8250;</div>' +
+      '</div>';
+
+      html += '<div class="cal-kpi-row">' +
+        '<div class="cal-kpi"><div class="v">' + ms.miles.toFixed(1) + '</div><div class="l">Miles</div></div>' +
+        '<div class="cal-kpi orange"><div class="v">' + ms.liftDays + '</div><div class="l">Lifts</div></div>' +
+        '<div class="cal-kpi green"><div class="v">' + ms.cardioDays + '</div><div class="l">Cardio</div></div>' +
+        '<div class="cal-kpi"><div class="v">' + (ms.avgWeight !== null ? ms.avgWeight.toFixed(1) : '--') + '</div><div class="l">Avg Wt</div></div>' +
+      '</div>';
+
+      html += '<div class="cal-grid">';
+      ['Mo','Tu','We','Th','Fr','Sa','Su'].forEach(function(w) {
+        html += '<div class="cal-weekday">' + w + '</div>';
+      });
+
+      const year = calMonth.getFullYear(), month = calMonth.getMonth();
+      const firstDay = new Date(year, month, 1);
+      const leading = (firstDay.getDay() + 6) % 7;
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const today = new Date();
+
+      for (let i = 0; i < leading; i++) html += '<div class="cal-day empty"></div>';
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const cellDate = new Date(year, month, day);
+        const match = dayList.find(d => sameDay(d.dateSortable, cellDate));
+        const isToday = cellDate.getFullYear() === today.getFullYear() && cellDate.getMonth() === today.getMonth() && cellDate.getDate() === today.getDate();
+        let classes = 'cal-day' + (isToday ? ' today' : '');
+        let dots = '';
+        let onclick = '';
+        if (match) {
+          classes += ' has-row';
+          onclick = ' onclick="openDay(' + match.rowIndex + ')"';
+          if (hasWorkout(match)) dots += '<div class="cal-dot orange"></div>';
+          if (hasCardio(match)) dots += '<div class="cal-dot green"></div>';
+        }
+        html += '<div class="' + classes + '"' + onclick + '>' + day + '<div class="cal-dots">' + dots + '</div></div>';
+      }
+
+      html += '</div>';
+      html += '<div class="cal-legend">' +
+        '<span><span class="dot" style="background:#C9A227"></span> Lift</span>' +
+        '<span><span class="dot" style="background:#5F6F63"></span> Cardio</span>' +
+      '</div>';
+
+      card.innerHTML = html;
+      app.appendChild(card);
+    }
+
+    function shiftMonth(delta) {
+      calMonth = new Date(calMonth.getFullYear(), calMonth.getMonth() + delta, 1);
+      showHome();
+    }
+
+    /* ---------- PR logging form ---------- */
+
+    function openPRForm() {
+      document.getElementById('backBtn').style.display = 'inline';
+      document.getElementById('switchBtn').style.display = 'none';
+      document.getElementById('kpiBtn').style.display = 'none';
+      document.getElementById('aiBtn').style.display = 'none';
+      document.getElementById('headerTitle').textContent = 'Log a PR';
+      renderPRForm();
+    }
+
+    function renderPRForm() {
+      const app = document.getElementById('app');
+      const today = new Date();
+      const todayStr = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+      app.innerHTML =
+        '<div class="card form-card">' +
+          '<div class="form-date">New Personal Record &middot; ' + escapeHtml(currentSheet) + '</div>' +
+          '<div class="field"><label>Lift</label>' + renderSelectWithAddNew('f_prLift', options.lifts, '', 'Choose a lift') + '</div>' +
+          '<div class="row2">' +
+            '<div class="field"><label>Weight (lb)</label><input id="f_prWeight" type="number" step="any" inputmode="decimal"></div>' +
+            '<div class="field"><label>Reps</label><input id="f_prReps" type="number" step="any" inputmode="decimal" value="1"></div>' +
+          '</div>' +
+          '<div class="field"><label>Date</label><input id="f_prDate" type="date" value="' + todayStr + '"></div>' +
+          '<button class="btn" onclick="savePRForm()">Save PR</button>' +
+          '<div style="height:10px;"></div>' +
+          '<button class="btn secondary" onclick="showHome()">Cancel</button>' +
+        '</div>';
+    }
+
+    function savePRForm() {
+      const liftSelect = document.getElementById('f_prLift');
+      const lift = liftSelect.value === '__add_new__' ? '' : liftSelect.value;
+      const weight = document.getElementById('f_prWeight').value;
+      const reps = document.getElementById('f_prReps').value;
+      const date = document.getElementById('f_prDate').value;
+      if (!lift) { showError({ message: 'Please choose (or add) a lift first.' }); return; }
+      if (!weight) { showError({ message: 'Please enter a weight.' }); return; }
+      const payload = { sheetName: currentSheet, lift: lift, weight: weight, reps: reps, date: date };
+      google.script.run.withFailureHandler(showError).withSuccessHandler(function() {
+        showToast('PR logged!');
+        delete prCache[currentSheet];
+        showHome();
+      }).savePR(payload);
+    }
+
+    /* ---------- AI Coach chat ---------- */
+
+    function openAiChat() {
+      document.getElementById('backBtn').style.display = 'inline';
+      document.getElementById('switchBtn').style.display = 'none';
+      document.getElementById('kpiBtn').style.display = 'none';
+      document.getElementById('aiBtn').style.display = 'none';
+      document.getElementById('headerTitle').textContent = 'AI Coach';
+      renderAiChat();
+    }
+
+    function renderAiChat() {
+      const app = document.getElementById('app');
+      const history = aiChatHistory[currentSheet] || [];
+
+      let messagesHtml;
+      if (!history.length) {
+        messagesHtml = '<div class="ai-empty">Ask what to train today, or tap the suggestion button below \u2014 I\'ll look at your recent history.</div>';
+      } else {
+        messagesHtml = history.map(function(turn) {
+          const cls = turn.role === 'model' ? 'ai-msg ai-msg-bot' : 'ai-msg ai-msg-user';
+          return '<div class="' + cls + '">' + escapeHtml(turn.text) + '</div>';
+        }).join('');
+      }
+
+      app.innerHTML =
+        '<div class="card ai-chat-card">' +
+          '<div class="ai-messages" id="aiMessages">' + messagesHtml + '</div>' +
+          '<div id="aiLoading" class="ai-loading" style="display:none;">Thinking...</div>' +
+        '</div>' +
+        '<div class="card">' +
+          '<button class="btn secondary" onclick="askAiSuggestion()" style="margin-bottom:10px;">What should I train today?</button>' +
+          '<div class="ai-input-row">' +
+            '<input type="text" id="aiInput" placeholder="Ask a follow-up..." onkeydown="if(event.key===\'Enter\'){sendAiMessage();}">' +
+            '<button class="btn" onclick="sendAiMessage()">Send</button>' +
+          '</div>' +
+        '</div>';
+
+      const msgEl = document.getElementById('aiMessages');
+      if (msgEl) msgEl.scrollTop = msgEl.scrollHeight;
+    }
+
+    function askAiSuggestion() {
+      sendAiMessageText('What should I train today based on my recent history?');
+    }
+
+    function sendAiMessage() {
+      const input = document.getElementById('aiInput');
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      sendAiMessageText(text);
+    }
+
+    function sendAiMessageText(text) {
+      if (!aiChatHistory[currentSheet]) aiChatHistory[currentSheet] = [];
+      aiChatHistory[currentSheet].push({ role: 'user', text: text });
+      renderAiChat();
+      const loadingEl = document.getElementById('aiLoading');
+      if (loadingEl) loadingEl.style.display = 'block';
+
+      google.script.run.withFailureHandler(function(err) {
+        // Drop the pending user turn so a failed request doesn't leave the
+        // conversation stuck expecting a reply that never arrived.
+        aiChatHistory[currentSheet].pop();
+        renderAiChat();
+        showError(err);
+      }).withSuccessHandler(function(result) {
+        aiChatHistory[currentSheet].push({ role: 'model', text: result.reply });
+        renderAiChat();
+      }).getAiSuggestion(currentSheet, aiChatHistory[currentSheet]);
+    }
+
+
+
+    function openKpis() {
+      document.getElementById('backBtn').style.display = 'inline';
+      document.getElementById('switchBtn').style.display = 'none';
+      document.getElementById('kpiBtn').style.display = 'none';
+      document.getElementById('aiBtn').style.display = 'none';
+      document.getElementById('headerTitle').textContent = 'Insights';
+      kpiPerson = kpiPerson || currentSheet;
+      renderKpis();
+    }
+
+    function getMonthOptions() {
+      let list;
+      if (kpiPerson === 'compare') {
+        const nameA = sheetNames[0], nameB = sheetNames[1] || sheetNames[0];
+        list = (dayListCache[nameA] || []).concat(dayListCache[nameB] || []);
+      } else {
+        list = dayListCache[kpiPerson] || [];
+      }
+      const seen = {};
+      list.forEach(function(d) {
+        const dt = new Date(d.dateSortable);
+        const key = dt.getFullYear() + '-' + String(dt.getMonth() + 1).padStart(2, '0');
+        seen[key] = dt.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+      });
+      return Object.keys(seen).sort().reverse().map(function(k) { return { key: k, label: seen[k] }; });
+    }
+
+    function getRangeBounds(rangeKey) {
+      const today = new Date(); today.setHours(0,0,0,0);
+      if (rangeKey === 'week') {
+        const start = mondayOf(today);
+        const end = new Date(start); end.setDate(start.getDate() + 6); end.setHours(23,59,59,999);
+        return { start: start.getTime(), end: end.getTime() };
+      }
+      if (rangeKey === 'month') {
+        const start = new Date(today.getFullYear(), today.getMonth(), 1);
+        const end = new Date(today.getFullYear(), today.getMonth() + 1, 0); end.setHours(23,59,59,999);
+        return { start: start.getTime(), end: end.getTime() };
+      }
+      if (rangeKey === '3months') {
+        const start = new Date(today); start.setDate(start.getDate() - 89);
+        const end = new Date(today); end.setHours(23,59,59,999);
+        return { start: start.getTime(), end: end.getTime() };
+      }
+      if (rangeKey === 'year') {
+        const start = new Date(today.getFullYear(), 0, 1);
+        const end = new Date(today.getFullYear(), 11, 31); end.setHours(23,59,59,999);
+        return { start: start.getTime(), end: end.getTime() };
+      }
+      if (rangeKey === 'all') {
+        return { start: -Infinity, end: Infinity };
+      }
+      // specific month key: "YYYY-MM"
+      const m = /^(\d{4})-(\d{2})$/.exec(rangeKey);
+      if (m) {
+        const y = Number(m[1]), mo = Number(m[2]) - 1;
+        const start = new Date(y, mo, 1);
+        const end = new Date(y, mo + 1, 0); end.setHours(23,59,59,999);
+        return { start: start.getTime(), end: end.getTime() };
+      }
+      return { start: -Infinity, end: Infinity };
+    }
+
+    function rangeLabel(rangeKey) {
+      const presets = { week: 'This Week', month: 'This Month', '3months': 'Last 3 Months', year: 'This Year', all: 'All Time' };
+      if (presets[rangeKey]) return presets[rangeKey];
+      const opt = getMonthOptions().find(o => o.key === rangeKey);
+      return opt ? opt.label : rangeKey;
+    }
+
+    function computeRangeStats(list, start, end) {
+      let miles = 0, liftDays = 0, cardioDays = 0, rowsInRange = 0, dataRows = 0;
+      const muscleFreq = {}, cardioFreq = {};
+      const weightPoints = [];
+      list.forEach(function(d) {
+        if (d.dateSortable < start || d.dateSortable > end) return;
+        rowsInRange++;
+        if (d.hasData) dataRows++;
+        if (typeof d.miles === 'number') miles += d.miles;
+        if (hasWorkout(d)) {
+          liftDays++;
+          String(d.workout).split(',').map(s => s.trim()).filter(Boolean).forEach(function(m) {
+            if (m.toLowerCase() === 'none') return;
+            muscleFreq[m] = (muscleFreq[m] || 0) + 1;
+          });
+        }
+        if (hasCardio(d)) {
+          cardioDays++;
+          const c = String(d.cardio).trim();
+          cardioFreq[c] = (cardioFreq[c] || 0) + 1;
+        }
+        if (typeof d.weight === 'number') weightPoints.push({ ts: d.dateSortable, weight: d.weight });
+      });
+      weightPoints.sort((a, b) => a.ts - b.ts);
+      const weightStart = weightPoints.length ? weightPoints[0].weight : null;
+      const weightEnd = weightPoints.length ? weightPoints[weightPoints.length - 1].weight : null;
+      const weightChange = (weightStart !== null && weightEnd !== null) ? (weightEnd - weightStart) : null;
+      return {
+        miles, liftDays, cardioDays, rowsInRange, dataRows,
+        adherencePct: rowsInRange ? Math.round((dataRows / rowsInRange) * 100) : 0,
+        muscleFreq, cardioFreq, weightPoints, weightStart, weightEnd, weightChange
+      };
+    }
+
+    function topEntries(freqObj, n) {
+      return Object.keys(freqObj)
+        .map(k => ({ label: k, count: freqObj[k] }))
+        .sort((a, b) => b.count - a.count)
+        .slice(0, n || 8);
+    }
+
+    function renderFreqBars(freqObj, color) {
+      const entries = topEntries(freqObj, 8);
+      if (!entries.length) return '<div class="empty-note">No data in this range.</div>';
+      const max = entries[0].count;
+      return entries.map(function(e) {
+        const pct = Math.max(8, Math.round((e.count / max) * 100));
+        return '<div class="freq-row">' +
+          '<div class="freq-label">' + escapeHtml(e.label) + '</div>' +
+          '<div class="freq-bar-track"><div class="freq-bar-fill" style="width:' + pct + '%; background:' + color + '"></div></div>' +
+          '<div class="freq-count">' + e.count + '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    function buildWeightChart(series) {
+      // series: [{ label, color, points: [{ts, weight}] }]
+      const allPoints = series.flatMap(s => s.points);
+      if (allPoints.length < 2) return null;
+      const W = 280, H = 120, PAD = 8;
+      const xs = allPoints.map(p => p.ts), ys = allPoints.map(p => p.weight);
+      const minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
+      const minY = Math.min.apply(null, ys), maxY = Math.max.apply(null, ys);
+      const xSpan = (maxX - minX) || 1, ySpan = (maxY - minY) || 1;
+      function xScale(ts) { return PAD + ((ts - minX) / xSpan) * (W - 2 * PAD); }
+      function yScale(w) { return H - PAD - ((w - minY) / ySpan) * (H - 2 * PAD); }
+
+      let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%; height:140px;">';
+      series.forEach(function(s) {
+        if (s.points.length < 2) return;
+        const pts = s.points.map(p => xScale(p.ts) + ',' + yScale(p.weight)).join(' ');
+        svg += '<polyline points="' + pts + '" fill="none" stroke="' + s.color + '" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
+        const last = s.points[s.points.length - 1];
+        svg += '<circle cx="' + xScale(last.ts) + '" cy="' + yScale(last.weight) + '" r="3.5" fill="' + s.color + '"/>';
+      });
+      svg += '</svg>';
+
+      const lowLabel = minY.toFixed(1), highLabel = maxY.toFixed(1);
+      svg = '<div style="display:flex; justify-content:space-between; font-size:10px; color:var(--ink-soft); margin-bottom:2px;"><span>' + highLabel + '</span></div>' +
+            svg +
+            '<div style="display:flex; justify-content:space-between; font-size:10px; color:var(--ink-soft); margin-top:2px;"><span>' + lowLabel + '</span></div>';
+      return svg;
+    }
+
+    function renderKpis() {
+      const app = document.getElementById('app');
+      app.innerHTML = '<div class="loading">Loading...</div>';
+
+      if (kpiPerson === 'compare') {
+        const nameA = sheetNames[0], nameB = sheetNames[1] || sheetNames[0];
+        ensureSheetLoaded(nameA, function() {
+          ensureSheetLoaded(nameB, function() {
+            ensurePRsLoaded(nameA, function() {
+              ensurePRsLoaded(nameB, function() {
+                renderKpiControls(app);
+                renderCompareContent(app, getRangeBounds(kpiRange));
+              });
+            });
+          });
+        });
+      } else {
+        ensureSheetLoaded(kpiPerson, function(list) {
+          ensurePRsLoaded(kpiPerson, function(prList) {
+            renderKpiControls(app);
+            renderSingleContent(app, list, getRangeBounds(kpiRange), prList);
+          });
+        });
+      }
+    }
+
+    // Builds the person segmented-control + range dropdown. Only called once the
+    // relevant person's data (and therefore their month list) is actually cached,
+    // so "Specific Month" always reflects the person currently selected in Insights.
+    function renderKpiControls(app) {
+      app.innerHTML = '';
+
+      const card = document.createElement('div');
+      card.className = 'card';
+
+      let segHtml = '<div class="seg-control">';
+      sheetNames.forEach(function(name) {
+        segHtml += '<div class="seg-btn' + (kpiPerson === name ? ' active' : '') + '" onclick="setKpiPerson(\'' + escapeAttr(name) + '\')">' + escapeHtml(name) + '</div>';
+      });
+      segHtml += '<div class="seg-btn' + (kpiPerson === 'compare' ? ' active' : '') + '" onclick="setKpiPerson(\'compare\')">Compare</div>';
+      segHtml += '</div>';
+
+      const presets = [['week','This Week'],['month','This Month'],['3months','Last 3 Months'],['year','This Year'],['all','All Time']];
+      let rangeHtml = '<div class="kpi-range"><select id="kpiRangeSelect" onchange="onKpiRangeChange()">';
+      rangeHtml += '<optgroup label="Quick Ranges">';
+      presets.forEach(function(p) {
+        rangeHtml += '<option value="' + p[0] + '"' + (kpiRange === p[0] ? ' selected' : '') + '>' + p[1] + '</option>';
+      });
+      rangeHtml += '</optgroup><optgroup label="Specific Month">';
+      getMonthOptions().forEach(function(o) {
+        rangeHtml += '<option value="' + o.key + '"' + (kpiRange === o.key ? ' selected' : '') + '>' + o.label + '</option>';
+      });
+      rangeHtml += '</optgroup></select></div>';
+
+      card.innerHTML = segHtml + rangeHtml;
+      app.appendChild(card);
+    }
+
+    function setKpiPerson(name) {
+      kpiPerson = name;
+      renderKpis();
+    }
+
+    function onKpiRangeChange() {
+      kpiRange = document.getElementById('kpiRangeSelect').value;
+      renderKpis();
+    }
+
+    function renderSingleContent(app, list, bounds, prList) {
+      const stats = computeRangeStats(list, bounds.start, bounds.end);
+
+      const grid = document.createElement('div');
+      grid.className = 'kpi-grid';
+      const weightSub = stats.weightChange === null ? 'No weight logged'
+        : (stats.weightChange === 0 ? 'No change' : (stats.weightChange > 0 ? '+' : '') + stats.weightChange.toFixed(1) + ' lbs');
+      grid.innerHTML =
+        '<div class="kpi-tile gold"><div class="v">' + stats.liftDays + '</div><div class="l">Lift Days</div></div>' +
+        '<div class="kpi-tile sage"><div class="v">' + stats.cardioDays + '</div><div class="l">Cardio Days</div></div>' +
+        '<div class="kpi-tile"><div class="v">' + stats.miles.toFixed(1) + '</div><div class="l">Total Miles</div></div>' +
+        '<div class="kpi-tile"><div class="v">' + (stats.weightEnd !== null ? stats.weightEnd.toFixed(1) : '--') + '</div><div class="l">Weight</div><div class="sub">' + weightSub + '</div></div>' +
+        '<div class="kpi-tile"><div class="v">' + stats.adherencePct + '%</div><div class="l">Days Logged</div></div>' +
+        '<div class="kpi-tile"><div class="v">' + (stats.liftDays + stats.cardioDays) + '</div><div class="l">Total Sessions</div></div>';
+      app.appendChild(grid);
+
+      const weightCard = document.createElement('div');
+      weightCard.className = 'card';
+      const personColor = (kpiPerson === sheetNames[0]) ? '#C9A227' : '#5F6F63';
+      const chartHtml = buildWeightChart([{ label: kpiPerson, color: personColor, points: stats.weightPoints }]);
+      weightCard.innerHTML = '<div class="section-title" style="margin-top:0;">Weight Trend &middot; ' + escapeHtml(rangeLabel(kpiRange)) + '</div>' +
+        (chartHtml || '<div class="empty-note">Log weight on at least 2 days in this range to see a trend.</div>');
+      app.appendChild(weightCard);
+
+      const muscleCard = document.createElement('div');
+      muscleCard.className = 'card';
+      muscleCard.innerHTML = '<div class="section-title" style="margin-top:0;">Muscle Group Frequency</div>' + renderFreqBars(stats.muscleFreq, '#C9A227');
+      app.appendChild(muscleCard);
+
+      const cardioCard = document.createElement('div');
+      cardioCard.className = 'card';
+      cardioCard.innerHTML = '<div class="section-title" style="margin-top:0;">Cardio Type Frequency</div>' + renderFreqBars(stats.cardioFreq, '#5F6F63');
+      app.appendChild(cardioCard);
+
+      renderPRSection(app, prList, bounds);
+    }
+
+    function renderPRSection(app, prList, bounds) {
+      const card = document.createElement('div');
+      card.className = 'card';
+      if (!prList.length) {
+        card.innerHTML = '<div class="section-title" style="margin-top:0;">Personal Records</div>' +
+          '<div class="empty-note">No PRs logged yet. Tap "Log a PR" from the home screen to add your first one.</div>';
+        app.appendChild(card);
+        return;
+      }
+
+      // prList is newest-first; take the first (latest) entry per lift.
+      const latestByLift = {};
+      prList.forEach(function(p) {
+        if (!(p.lift in latestByLift)) latestByLift[p.lift] = p;
+      });
+      const lifts = Object.keys(latestByLift).sort();
+
+      let gridHtml = '<div class="section-title" style="margin-top:0;">Personal Records</div><div class="kpi-grid">';
+      lifts.forEach(function(liftName) {
+        const p = latestByLift[liftName];
+        const repsLabel = (p.reps && p.reps > 1) ? (' &times;' + p.reps) : '';
+        gridHtml += '<div class="kpi-tile gold"><div class="v">' + p.weight + ' lb' + repsLabel + '</div><div class="l">' + escapeHtml(liftName) + '</div><div class="sub">' + p.dateLabel + '</div></div>';
+      });
+      gridHtml += '</div>';
+      card.innerHTML = gridHtml;
+      app.appendChild(card);
+
+      const inRange = prList.filter(function(p) { return p.dateSortable >= bounds.start && p.dateSortable <= bounds.end; });
+      const histCard = document.createElement('div');
+      histCard.className = 'card';
+      if (!inRange.length) {
+        histCard.innerHTML = '<div class="section-title" style="margin-top:0;">PR History &middot; ' + escapeHtml(rangeLabel(kpiRange)) + '</div><div class="empty-note">No PRs in this range.</div>';
+      } else {
+        const rowsHtml = inRange.map(function(p) {
+          const repsLabel = (p.reps && p.reps > 1) ? (' &times;' + p.reps) : '';
+          return '<div class="freq-row"><div class="freq-label" style="width:auto; flex:1;">' + escapeHtml(p.lift) + '</div><div class="freq-count" style="width:auto;">' + p.weight + ' lb' + repsLabel + '</div></div>' +
+            '<div class="pr-history-date">' + p.dateLabel + '</div>';
+        }).join('');
+        histCard.innerHTML = '<div class="section-title" style="margin-top:0;">PR History &middot; ' + escapeHtml(rangeLabel(kpiRange)) + '</div>' + rowsHtml;
+      }
+      app.appendChild(histCard);
+    }
+
+    function renderCompareContent(app, bounds) {
+      const nameA = sheetNames[0], nameB = sheetNames[1] || sheetNames[0];
+      const statsA = computeRangeStats(dayListCache[nameA] || [], bounds.start, bounds.end);
+      const statsB = computeRangeStats(dayListCache[nameB] || [], bounds.start, bounds.end);
+
+      const table = document.createElement('div');
+      table.className = 'card';
+      function fmtWeight(s) { return s.weightEnd !== null ? s.weightEnd.toFixed(1) : '--'; }
+      function fmtChange(s) {
+        if (s.weightChange === null) return '--';
+        return (s.weightChange > 0 ? '+' : '') + s.weightChange.toFixed(1);
+      }
+      table.innerHTML =
+        '<div class="section-title" style="margin-top:0;">' + escapeHtml(rangeLabel(kpiRange)) + '</div>' +
+        '<table class="compare-table">' +
+          '<tr><th></th><th>' + escapeHtml(nameA) + '</th><th>' + escapeHtml(nameB) + '</th></tr>' +
+          '<tr><td>Lift Days</td><td class="gold">' + statsA.liftDays + '</td><td class="gold">' + statsB.liftDays + '</td></tr>' +
+          '<tr><td>Cardio Days</td><td class="sage">' + statsA.cardioDays + '</td><td class="sage">' + statsB.cardioDays + '</td></tr>' +
+          '<tr><td>Total Miles</td><td>' + statsA.miles.toFixed(1) + '</td><td>' + statsB.miles.toFixed(1) + '</td></tr>' +
+          '<tr><td>Weight</td><td>' + fmtWeight(statsA) + '</td><td>' + fmtWeight(statsB) + '</td></tr>' +
+          '<tr><td>Weight Change</td><td>' + fmtChange(statsA) + '</td><td>' + fmtChange(statsB) + '</td></tr>' +
+          '<tr><td>Days Logged</td><td>' + statsA.adherencePct + '%</td><td>' + statsB.adherencePct + '%</td></tr>' +
+        '</table>';
+      app.appendChild(table);
+
+      const weightCard = document.createElement('div');
+      weightCard.className = 'card';
+      const chartHtml = buildWeightChart([
+        { label: nameA, color: '#C9A227', points: statsA.weightPoints },
+        { label: nameB, color: '#5F6F63', points: statsB.weightPoints }
+      ]);
+      weightCard.innerHTML = '<div class="section-title" style="margin-top:0;">Weight Trend</div>' +
+        (chartHtml || '<div class="empty-note">Need at least 2 weight entries (combined) in this range to plot a trend.</div>') +
+        '<div class="chart-legend"><span><span class="dot" style="background:#C9A227"></span>' + escapeHtml(nameA) + '</span><span><span class="dot" style="background:#5F6F63"></span>' + escapeHtml(nameB) + '</span></div>';
+      app.appendChild(weightCard);
+
+      renderComparePRs(app, prCache[nameA] || [], prCache[nameB] || [], nameA, nameB);
+    }
+
+    function renderComparePRs(app, prListA, prListB, nameA, nameB) {
+      const latestA = {}, latestB = {};
+      prListA.forEach(function(p) { if (!(p.lift in latestA)) latestA[p.lift] = p; });
+      prListB.forEach(function(p) { if (!(p.lift in latestB)) latestB[p.lift] = p; });
+      const lifts = Array.from(new Set(Object.keys(latestA).concat(Object.keys(latestB)))).sort();
+      if (!lifts.length) return;
+
+      function fmt(p) { return p ? (p.weight + ' lb' + (p.reps > 1 ? (' \u00d7' + p.reps) : '')) : '--'; }
+      const rows = lifts.map(function(l) {
+        return '<tr><td>' + escapeHtml(l) + '</td><td class="gold">' + fmt(latestA[l]) + '</td><td class="gold">' + fmt(latestB[l]) + '</td></tr>';
+      }).join('');
+
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = '<div class="section-title" style="margin-top:0;">Personal Records</div>' +
+        '<table class="compare-table"><tr><th></th><th>' + escapeHtml(nameA) + '</th><th>' + escapeHtml(nameB) + '</th></tr>' + rows + '</table>';
+      app.appendChild(card);
+    }
+
+    /* ---------- edit form ---------- */
+
+    function openDay(rowIndex) {
+      document.getElementById('backBtn').style.display = 'inline';
+      document.getElementById('switchBtn').style.display = 'none';
+      document.getElementById('kpiBtn').style.display = 'none';
+      document.getElementById('aiBtn').style.display = 'none';
+      document.getElementById('headerTitle').textContent = 'Edit Day';
+      const app = document.getElementById('app');
+      app.innerHTML = '<div class="loading">Loading...</div>';
+
+      google.script.run.withFailureHandler(showError).withSuccessHandler(function(data) {
+        renderForm(data);
+      }).getRowData(currentSheet, rowIndex);
+    }
+
+    function renderForm(data) {
+      selectedMuscles = data.workout.slice();
+
+      const chipHtml = options.muscleGroups.map(function(m) {
+        const sel = selectedMuscles.indexOf(m) !== -1;
+        return '<div class="chip' + (sel ? ' selected' : '') + '" data-value="' + escapeAttr(m) + '" onclick="toggleChip(this)">' + escapeHtml(m) + '</div>';
+      }).join('');
+
+      const app = document.getElementById('app');
+      app.innerHTML =
+        '<div class="card form-card">' +
+          '<div class="form-date">' + data.dateLabel + ' &middot; Week ' + data.week + ', ' + data.day + '</div>' +
+          '<div class="field"><label>Workout (muscle groups)</label>' +
+            '<div class="chip-group" id="muscleChips">' + chipHtml + '</div>' +
+          '</div>' +
+          '<div class="field"><label>Workout Notes</label><textarea id="f_workoutNotes">' + escapeHtml(data.workoutNotes) + '</textarea></div>' +
+          '<div class="field"><label>Cardio</label>' + renderSelectWithAddNew('f_cardio', options.cardioTypes, data.cardio, '--') + '</div>' +
+          '<div class="field"><label>Cardio Note</label><textarea id="f_cardioNote">' + escapeHtml(data.cardioNote) + '</textarea></div>' +
+          '<div class="row2">' +
+            '<div class="field"><label>Miles</label><input id="f_miles" type="number" step="0.1" inputmode="decimal" value="' + escapeAttr(data.miles) + '"></div>' +
+            '<div class="field"><label>Weight</label><input id="f_weight" type="number" step="0.1" inputmode="decimal" value="' + escapeAttr(data.weight) + '"></div>' +
+          '</div>' +
+          '<button class="btn" onclick="save(' + data.rowIndex + ')">Save</button>' +
+          '<div style="height:10px;"></div>' +
+          '<button class="btn secondary" onclick="showHome()">Cancel</button>' +
+        '</div>';
+    }
+
+    function toggleChip(el) {
+      const value = el.getAttribute('data-value');
+      if (value === 'None') {
+        selectedMuscles = el.classList.contains('selected') ? [] : ['None'];
+      } else {
+        selectedMuscles = selectedMuscles.filter(v => v !== 'None');
+        const idx = selectedMuscles.indexOf(value);
+        if (idx === -1) selectedMuscles.push(value);
+        else selectedMuscles.splice(idx, 1);
+      }
+      document.querySelectorAll('#muscleChips .chip').forEach(function(chip) {
+        const v = chip.getAttribute('data-value');
+        chip.classList.toggle('selected', selectedMuscles.indexOf(v) !== -1);
+      });
+    }
+
+    function save(rowIndex) {
+      const cardioEl = document.getElementById('f_cardio');
+      const cardioVal = (cardioEl.value === '__add_new__') ? '' : cardioEl.value;
+      const payload = {
+        sheetName: currentSheet,
+        rowIndex: rowIndex,
+        workout: selectedMuscles,
+        workoutNotes: document.getElementById('f_workoutNotes').value,
+        cardio: cardioVal,
+        cardioNote: document.getElementById('f_cardioNote').value,
+        miles: document.getElementById('f_miles').value,
+        weight: document.getElementById('f_weight').value
+      };
+      google.script.run.withFailureHandler(showError).withSuccessHandler(function() {
+        showToast('Saved!');
+        google.script.run.withFailureHandler(showError).withSuccessHandler(function(list) {
+          dayList = list;
+          dayListCache[currentSheet] = list;
+          showHome();
+        }).getDayList(currentSheet);
+      }).saveRowData(payload);
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(function() { t.classList.remove('show'); }, 1800);
+    }
+
+    function escapeHtml(str) {
+      return String(str == null ? '' : str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+    function escapeAttr(str) {
+      return escapeHtml(str).replace(/"/g, '&quot;');
+    }
+
+    init();
+  </script>
+</body>
+</html>

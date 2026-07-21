@@ -380,15 +380,58 @@
      * automatically when Apps Script itself serves the page. This shim
      * recreates the same withSuccessHandler/withFailureHandler/.functionName()
      * shape by calling your Apps Script deployment's JSON API (the ?fn=...
-     * mode added to doGet in Code.gs) over fetch() instead. Every existing
-     * `google.script.run.withFailureHandler(...).withSuccessHandler(...).foo(...)`
-     * call below works completely unchanged against this shim.
+     * mode added to doGet in Code.gs).
+     *
+     * Uses JSONP (a <script> tag) rather than fetch(). Apps Script's CORS
+     * header support for fetch()/XHR from a different origin is unreliable
+     * (shows up as "Failed to fetch" in the console) — script tags aren't
+     * subject to CORS at all, which is why this works where fetch() didn't.
      *
      * ACTION NEEDED: paste your Apps Script Web App URL (ends in /exec) below.
      * Get it from Apps Script editor → Deploy → Manage deployments → copy
      * the "Web app" URL.
      */
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzWrQLtDKJHMO8nPucI3ak1p_s2Z3yui-DG44B0QY_Ad3vLE9613ty4EzU24ZcCdfniAw/exec';
+
+    let __jsonpCounter = 0;
+    function jsonpRequest_(url, onSuccess, onFailure) {
+      const callbackName = '__gsJsonpCb' + (__jsonpCounter++);
+      const script = document.createElement('script');
+      let finished = false;
+
+      function cleanup() {
+        delete window[callbackName];
+        if (script.parentNode) script.parentNode.removeChild(script);
+      }
+
+      window[callbackName] = function(data) {
+        if (finished) return;
+        finished = true;
+        cleanup();
+        if (data && data.error) {
+          if (onFailure) onFailure({ message: data.error });
+        } else if (onSuccess) {
+          onSuccess(data ? data.result : undefined);
+        }
+      };
+
+      script.onerror = function() {
+        if (finished) return;
+        finished = true;
+        cleanup();
+        if (onFailure) onFailure({ message: 'Could not reach the Apps Script API. Check that APPS_SCRIPT_URL is correct and the deployment access is set to "Anyone".' });
+      };
+
+      script.src = url + (url.indexOf('?') === -1 ? '?' : '&') + 'callback=' + callbackName;
+      document.head.appendChild(script);
+
+      setTimeout(function() {
+        if (finished) return;
+        finished = true;
+        cleanup();
+        if (onFailure) onFailure({ message: 'Request timed out.' });
+      }, 20000);
+    }
 
     function buildGoogleScriptRunShim_(apiBaseUrl) {
       function buildChain(onSuccess, onFailure) {
@@ -405,21 +448,7 @@
             return function() {
               const args = Array.prototype.slice.call(arguments);
               const url = apiBaseUrl + '?fn=' + encodeURIComponent(prop) + '&args=' + encodeURIComponent(JSON.stringify(args));
-              fetch(url)
-                .then(function(res) {
-                  if (!res.ok) throw new Error('HTTP ' + res.status);
-                  return res.json();
-                })
-                .then(function(data) {
-                  if (data.error) {
-                    if (onFailure) onFailure({ message: data.error });
-                  } else if (onSuccess) {
-                    onSuccess(data.result);
-                  }
-                })
-                .catch(function(err) {
-                  if (onFailure) onFailure({ message: 'Network error: ' + err.message });
-                });
+              jsonpRequest_(url, onSuccess, onFailure);
             };
           }
         });

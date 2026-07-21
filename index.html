@@ -3,27 +3,29 @@
 <head>
   <base target="_top">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
-  <link rel="apple-touch-icon" href="data:image/png;base64,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">
-  <link rel="icon" type="image/png" href="data:image/png;base64,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">
+  <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAACWElEQVR4nO3bsU0DQRBAUUDUhERCTwRUQUOOCamKgBC+OSRrPSu/Fzq6HX+t9u7s++fX0x385uHaF8Bc4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJg/R47QtIH+9PPz98eftcfyWXtdG6hu4cv07wzOe72GtdE+M4P6mZczxiu3VNjIMhxEESB0kcpKW3sn+euWbe0S02Z0rrdo4jp/GBJ/bFRk1pURzH13PLfUybkjMHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDm/sD4jFt+/7KSnYMkDpI4SOIgiYMkDpI4SOIgiYMkDtKWj883/e/Tdk/97RwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQVoUx/G3IZu+N7mIaVNat3McWc8tl/Ft1JSWvpX13R8xZ0rOHCRxkMRBEgdpYhznT2Rzzmv/td26JsZx15MaOMF/2Wtd98+vp2tfA0MN3TmYQBwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRykL3jKR7KdwUOqAAAAAElFTkSuQmCC">
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAACWElEQVR4nO3bsU0DQRBAUUDUhERCTwRUQUOOCamKgBC+OSRrPSu/Fzq6HX+t9u7s++fX0x385uHaF8Bc4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJgyQOkjhI4iCJg/R47QtIH+9PPz98eftcfyWXtdG6hu4cv07wzOe72GtdE+M4P6mZczxiu3VNjIMhxEESB0kcpKW3sn+euWbe0S02Z0rrdo4jp/GBJ/bFRk1pURzH13PLfUybkjMHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDm/sD4jFt+/7KSnYMkDpI4SOIgiYMkDpI4SOIgiYMkDtKWj883/e/Tdk/97RwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQVoUx/G3IZu+N7mIaVNat3McWc8tl/Ft1JSWvpX13R8xZ0rOHCRxkMRBEgdpYhznT2Rzzmv/td26JsZx15MaOMF/2Wtd98+vp2tfA0MN3TmYQBwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRwkcZDEQRIHSRykL3jKR7KdwUOqAAAAAElFTkSuQmCC">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Workout Log">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="theme-color" content="#5F6F63">
+  <meta name="theme-color" content="#343B1B">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
   <style>
     :root {
-      --gold: #C9A227;
-      --gold-dark: #A6851F;
-      --sage: #5F6F63;
-      --sage-light: #8FA189;
-      --blush: #E3CFC6;
-      --blush-light: #F0E2DB;
-      --cream: #F6F1E7;
-      --ink: #2A2119;
-      --ink-soft: #6B6259;
+      --gold: #3971B8;
+      --gold-dark: #2C5890;
+      --sage: #343B1B;
+      --sage-light: #778155;
+      --blush: #F6E6A5;
+      --blush-light: #FAF1CE;
+      --cream: #FBFCEE;
+      --ink: #343B1B;
+      --ink-soft: #888C74;
+      --surface: #FCF8E6;
+      --faint: #C3C6B3;
     }
     * { box-sizing: border-box; }
     html {
@@ -37,15 +39,15 @@
       -webkit-tap-highlight-color: transparent;
       overscroll-behavior-y: contain;
     }
-    .brand-font { font-family: 'Montserrat', -apple-system, sans-serif; letter-spacing: 0.4px; }
+    .brand-font { font-family: 'Poppins', -apple-system, sans-serif; letter-spacing: 0.4px; }
     header {
       background: var(--sage);
-      color: white;
+      color: var(--cream);
       padding: 16px;
       padding-top: calc(16px + env(safe-area-inset-top));
       font-size: 19px;
       font-weight: 700;
-      font-family: 'Montserrat', -apple-system, sans-serif;
+      font-family: 'Poppins', -apple-system, sans-serif;
       letter-spacing: 0.5px;
       text-transform: uppercase;
       position: sticky;
@@ -94,15 +96,15 @@
     /* Person select */
     .person-wrap { display: flex; flex-direction: column; gap: 14px; margin-top: 30px; }
     .person-btn {
-      background: white; border: 2px solid var(--blush); border-radius: 16px;
+      background: var(--surface); border: 2px solid var(--blush); border-radius: 16px;
       padding: 28px; text-align: center; font-size: 20px; font-weight: 700;
-      font-family: 'Montserrat', -apple-system, sans-serif; letter-spacing: 0.5px;
+      font-family: 'Poppins', -apple-system, sans-serif; letter-spacing: 0.5px;
       cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.06); color: var(--ink);
     }
     .person-btn:active { background: var(--blush-light); }
 
     .card {
-      background: white;
+      background: var(--surface);
       border-radius: 14px;
       padding: 16px;
       margin-bottom: 14px;
@@ -111,20 +113,20 @@
 
     /* Today card */
     .today-card { border-left: 5px solid var(--gold); }
-    .today-card .label { font-size: 12px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.5px; font-family: 'Montserrat', -apple-system, sans-serif; font-weight: 700; }
+    .today-card .label { font-size: 12px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.5px; font-family: 'Poppins', -apple-system, sans-serif; font-weight: 700; }
     .today-card .date { font-size: 18px; font-weight: 700; margin: 4px 0 10px; }
     .today-card .summary { font-size: 14px; color: var(--ink-soft); margin-bottom: 12px; min-height: 18px; }
     .btn {
       display: block; width: 100%; text-align: center; background: var(--gold);
       color: var(--ink); border: none; border-radius: 10px; padding: 14px;
       font-size: 16px; font-weight: 700; cursor: pointer;
-      font-family: 'Montserrat', -apple-system, sans-serif; letter-spacing: 0.3px;
+      font-family: 'Poppins', -apple-system, sans-serif; letter-spacing: 0.3px;
     }
     .btn.secondary { background: var(--blush-light); color: var(--ink); }
     .btn:active { opacity: 0.85; }
 
     /* Stat tiles */
-    .section-title { font-size: 12px; color: var(--ink-soft); text-transform: uppercase; margin: 4px 4px 8px; letter-spacing: 0.8px; font-family: 'Montserrat', -apple-system, sans-serif; font-weight: 700; }
+    .section-title { font-size: 12px; color: var(--ink-soft); text-transform: uppercase; margin: 4px 4px 8px; letter-spacing: 0.8px; font-family: 'Poppins', -apple-system, sans-serif; font-weight: 700; }
     .stat-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -132,13 +134,13 @@
       margin-bottom: 14px;
     }
     .stat-tile {
-      background: white;
+      background: var(--surface);
       border-radius: 12px;
       padding: 14px;
       box-shadow: 0 1px 2px rgba(0,0,0,0.05);
     }
-    .stat-tile .v { font-size: 22px; font-weight: 800; font-family: 'Montserrat', -apple-system, sans-serif; }
-    .stat-tile .l { font-size: 12px; color: var(--ink-soft); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.4px; font-family: 'Montserrat', -apple-system, sans-serif; font-weight: 700; }
+    .stat-tile .v { font-size: 22px; font-weight: 800; font-family: 'Poppins', -apple-system, sans-serif; }
+    .stat-tile .l { font-size: 12px; color: var(--ink-soft); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.4px; font-family: 'Poppins', -apple-system, sans-serif; font-weight: 700; }
     .stat-tile.orange .v { color: var(--gold-dark); }
     .stat-tile.green .v { color: var(--sage); }
     .stat-tile.blue .v { color: var(--sage-light); }
@@ -146,11 +148,11 @@
     /* Jump to date */
     .jump-card label {
       font-size: 12px; color: var(--ink-soft); text-transform: uppercase;
-      letter-spacing: 0.5px; display: block; margin-bottom: 6px; font-family: 'Montserrat', -apple-system, sans-serif; font-weight: 700;
+      letter-spacing: 0.5px; display: block; margin-bottom: 6px; font-family: 'Poppins', -apple-system, sans-serif; font-weight: 700;
     }
     .jump-card input {
-      width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #d8dce2;
-      font-size: 15px; background: white; font-family: inherit;
+      width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--blush);
+      font-size: 15px; background: var(--surface); font-family: inherit;
     }
     .jump-results { margin-top: 8px; }
     .jump-result-row {
@@ -170,7 +172,7 @@
       justify-content: space-between;
       margin-bottom: 10px;
     }
-    .cal-header .month-label { font-size: 16px; font-weight: 700; font-family: 'Montserrat', -apple-system, sans-serif; }
+    .cal-header .month-label { font-size: 16px; font-weight: 700; font-family: 'Poppins', -apple-system, sans-serif; }
     .cal-nav {
       width: 34px; height: 34px;
       border-radius: 50%;
@@ -192,8 +194,8 @@
       border-radius: 10px;
       padding: 8px 2px;
     }
-    .cal-kpi .v { font-size: 15px; font-weight: 700; font-family: 'Montserrat', -apple-system, sans-serif; }
-    .cal-kpi .l { font-size: 10px; color: var(--ink-soft); text-transform: uppercase; font-family: 'Montserrat', -apple-system, sans-serif; font-weight: 700; letter-spacing: 0.3px; }
+    .cal-kpi .v { font-size: 15px; font-weight: 700; font-family: 'Poppins', -apple-system, sans-serif; }
+    .cal-kpi .l { font-size: 10px; color: var(--ink-soft); text-transform: uppercase; font-family: 'Poppins', -apple-system, sans-serif; font-weight: 700; letter-spacing: 0.3px; }
     .cal-kpi.orange .v { color: var(--gold-dark); }
     .cal-kpi.green .v { color: var(--sage); }
     .cal-grid {
@@ -207,7 +209,7 @@
       color: var(--ink-soft);
       font-weight: 700;
       padding-bottom: 4px;
-      font-family: 'Montserrat', -apple-system, sans-serif;
+      font-family: 'Poppins', -apple-system, sans-serif;
     }
     .cal-day {
       aspect-ratio: 1;
@@ -219,11 +221,11 @@
       font-size: 13px;
       position: relative;
       background: var(--cream);
-      color: #ccc;
+      color: var(--faint);
     }
     .cal-day.empty { background: transparent; }
     .cal-day.has-row {
-      background: white;
+      background: var(--surface);
       color: var(--ink);
       cursor: pointer;
       box-shadow: 0 1px 2px rgba(0,0,0,0.05);
@@ -247,13 +249,13 @@
 
     /* Form */
     .field { margin-bottom: 14px; }
-    .field label { display: block; font-size: 13px; font-weight: 700; color: var(--ink-soft); margin-bottom: 6px; font-family: 'Montserrat', -apple-system, sans-serif; }
+    .field label { display: block; font-size: 13px; font-weight: 700; color: var(--ink-soft); margin-bottom: 6px; font-family: 'Poppins', -apple-system, sans-serif; }
     .field input, .field textarea, .field select {
       width: 100%; padding: 12px; border: 1px solid var(--blush); border-radius: 10px;
-      font-size: 16px; background: white; font-family: inherit;
+      font-size: 16px; background: var(--surface); font-family: inherit;
     }
     .field textarea { min-height: 70px; resize: vertical; }
-    .form-card .form-date { font-size: 16px; font-weight: 700; margin-bottom: 14px; color: var(--sage); font-family: 'Montserrat', -apple-system, sans-serif; }
+    .form-card .form-date { font-size: 16px; font-weight: 700; margin-bottom: 14px; color: var(--sage); font-family: 'Poppins', -apple-system, sans-serif; }
     .row2 { display: flex; gap: 10px; }
     .row2 .field { flex: 1; }
     .chip-group { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -267,13 +269,13 @@
     .add-new-row { display: none; gap: 6px; margin-top: 8px; }
     .add-new-row input {
       flex: 1; padding: 10px; border: 1px solid var(--blush); border-radius: 8px;
-      font-size: 14px; background: white; font-family: inherit;
+      font-size: 14px; background: var(--surface); font-family: inherit;
     }
     .add-new-row .btn { width: auto; padding: 10px 14px; flex-shrink: 0; }
 
     .toast {
       position: fixed; bottom: calc(24px + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%);
-      background: var(--ink); color: white; padding: 10px 18px; border-radius: 20px;
+      background: var(--ink); color: var(--cream); padding: 10px 18px; border-radius: 20px;
       font-size: 14px; opacity: 0; transition: opacity 0.25s; pointer-events: none;
     }
     .toast.show { opacity: 1; }
@@ -294,14 +296,14 @@
       border-radius: 9px;
       font-size: 13px;
       font-weight: 700;
-      font-family: 'Montserrat', -apple-system, sans-serif;
+      font-family: 'Poppins', -apple-system, sans-serif;
       cursor: pointer;
       color: var(--ink-soft);
     }
-    .seg-btn.active { background: white; color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
+    .seg-btn.active { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,0.08); }
     .kpi-range select {
       width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--blush);
-      font-size: 15px; background: white; margin-bottom: 14px;
+      font-size: 15px; background: var(--surface); margin-bottom: 14px;
     }
     .kpi-grid {
       display: grid;
@@ -309,16 +311,16 @@
       gap: 10px;
       margin-bottom: 14px;
     }
-    .kpi-tile { background: white; border-radius: 12px; padding: 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
-    .kpi-tile .v { font-size: 21px; font-weight: 800; font-family: 'Montserrat', -apple-system, sans-serif; }
-    .kpi-tile .l { font-size: 11px; color: var(--ink-soft); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.4px; font-family: 'Montserrat', -apple-system, sans-serif; font-weight: 700; }
+    .kpi-tile { background: var(--surface); border-radius: 12px; padding: 14px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+    .kpi-tile .v { font-size: 21px; font-weight: 800; font-family: 'Poppins', -apple-system, sans-serif; }
+    .kpi-tile .l { font-size: 11px; color: var(--ink-soft); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.4px; font-family: 'Poppins', -apple-system, sans-serif; font-weight: 700; }
     .kpi-tile .sub { font-size: 12px; color: var(--ink-soft); margin-top: 4px; }
     .kpi-tile.gold .v { color: var(--gold-dark); }
     .kpi-tile.sage .v { color: var(--sage); }
 
     .compare-table { width: 100%; border-collapse: collapse; }
     .compare-table th {
-      font-family: 'Montserrat', -apple-system, sans-serif; font-size: 11px; text-transform: uppercase;
+      font-family: 'Poppins', -apple-system, sans-serif; font-size: 11px; text-transform: uppercase;
       color: var(--ink-soft); text-align: center; padding: 6px 4px; letter-spacing: 0.3px;
     }
     .compare-table th:first-child { text-align: left; }
@@ -336,7 +338,7 @@
     .freq-label { width: 78px; font-size: 12px; color: var(--ink-soft); flex-shrink: 0; }
     .freq-bar-track { flex: 1; height: 10px; background: var(--cream); border-radius: 6px; overflow: hidden; }
     .freq-bar-fill { height: 100%; border-radius: 6px; }
-    .freq-count { width: 22px; text-align: right; font-size: 12px; font-weight: 700; flex-shrink: 0; font-family: 'Montserrat', -apple-system, sans-serif; }
+    .freq-count { width: 22px; text-align: right; font-size: 12px; font-weight: 700; flex-shrink: 0; font-family: 'Poppins', -apple-system, sans-serif; }
 
     .pr-history-date { font-size: 11px; color: var(--ink-soft); margin: -4px 0 10px 0; }
 
@@ -351,7 +353,7 @@
     .ai-input-row { display: flex; gap: 8px; }
     .ai-input-row input {
       flex: 1; padding: 12px; border: 1px solid var(--blush); border-radius: 10px;
-      font-size: 15px; background: white; font-family: inherit;
+      font-size: 15px; background: var(--surface); font-family: inherit;
     }
     .ai-input-row .btn { width: auto; padding: 12px 16px; }
   </style>
@@ -832,8 +834,8 @@
 
       html += '</div>';
       html += '<div class="cal-legend">' +
-        '<span><span class="dot" style="background:#C9A227"></span> Lift</span>' +
-        '<span><span class="dot" style="background:#5F6F63"></span> Cardio</span>' +
+        '<span><span class="dot" style="background:#3971B8"></span> Lift</span>' +
+        '<span><span class="dot" style="background:#C8D69B"></span> Cardio</span>' +
       '</div>';
 
       card.innerHTML = html;
@@ -1206,7 +1208,7 @@
 
       const weightCard = document.createElement('div');
       weightCard.className = 'card';
-      const personColor = (kpiPerson === sheetNames[0]) ? '#C9A227' : '#5F6F63';
+      const personColor = (kpiPerson === sheetNames[0]) ? '#3971B8' : '#C8D69B';
       const chartHtml = buildWeightChart([{ label: kpiPerson, color: personColor, points: stats.weightPoints }]);
       weightCard.innerHTML = '<div class="section-title" style="margin-top:0;">Weight Trend &middot; ' + escapeHtml(rangeLabel(kpiRange)) + '</div>' +
         (chartHtml || '<div class="empty-note">Log weight on at least 2 days in this range to see a trend.</div>');
@@ -1214,12 +1216,12 @@
 
       const muscleCard = document.createElement('div');
       muscleCard.className = 'card';
-      muscleCard.innerHTML = '<div class="section-title" style="margin-top:0;">Muscle Group Frequency</div>' + renderFreqBars(stats.muscleFreq, '#C9A227');
+      muscleCard.innerHTML = '<div class="section-title" style="margin-top:0;">Muscle Group Frequency</div>' + renderFreqBars(stats.muscleFreq, '#3971B8');
       app.appendChild(muscleCard);
 
       const cardioCard = document.createElement('div');
       cardioCard.className = 'card';
-      cardioCard.innerHTML = '<div class="section-title" style="margin-top:0;">Cardio Type Frequency</div>' + renderFreqBars(stats.cardioFreq, '#5F6F63');
+      cardioCard.innerHTML = '<div class="section-title" style="margin-top:0;">Cardio Type Frequency</div>' + renderFreqBars(stats.cardioFreq, '#C8D69B');
       app.appendChild(cardioCard);
 
       renderPRSection(app, prList, bounds);
@@ -1296,12 +1298,12 @@
       const weightCard = document.createElement('div');
       weightCard.className = 'card';
       const chartHtml = buildWeightChart([
-        { label: nameA, color: '#C9A227', points: statsA.weightPoints },
-        { label: nameB, color: '#5F6F63', points: statsB.weightPoints }
+        { label: nameA, color: '#3971B8', points: statsA.weightPoints },
+        { label: nameB, color: '#C8D69B', points: statsB.weightPoints }
       ]);
       weightCard.innerHTML = '<div class="section-title" style="margin-top:0;">Weight Trend</div>' +
         (chartHtml || '<div class="empty-note">Need at least 2 weight entries (combined) in this range to plot a trend.</div>') +
-        '<div class="chart-legend"><span><span class="dot" style="background:#C9A227"></span>' + escapeHtml(nameA) + '</span><span><span class="dot" style="background:#5F6F63"></span>' + escapeHtml(nameB) + '</span></div>';
+        '<div class="chart-legend"><span><span class="dot" style="background:#3971B8"></span>' + escapeHtml(nameA) + '</span><span><span class="dot" style="background:#C8D69B"></span>' + escapeHtml(nameB) + '</span></div>';
       app.appendChild(weightCard);
 
       renderComparePRs(app, prCache[nameA] || [], prCache[nameB] || [], nameA, nameB);

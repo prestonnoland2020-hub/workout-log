@@ -266,6 +266,8 @@
       font-size: 14px; cursor: pointer; border: 1px solid var(--blush-light); user-select: none;
     }
     .chip.selected { background: var(--gold); color: var(--ink); border-color: var(--gold); font-weight: 700; }
+    .chip.chip-add { background: transparent; border: 1px dashed var(--ink-soft); color: var(--ink-soft); }
+    .chip.chip-add:active { background: var(--blush-light); }
 
     /* Growable select ("+ Add new...") */
     .add-new-row { display: none; gap: 6px; margin-top: 8px; }
@@ -483,14 +485,14 @@
     let todayRowIndex = null;
     let options = { muscleGroups: [], cardioTypes: [], lifts: [] };
     let selectedMuscles = [];
+    let selectedCardio = [];
     let calMonth = null; // Date, first-of-month, no time
     let kpiPerson = null; // sheet name or 'compare'
     let kpiRange = 'month';
     let aiChatHistory = {}; // sheetName -> array of {role, text}
 
     // Maps a growable <select> field id to which backend list it belongs to.
-    const GROWABLE_KIND = { f_cardio: 'cardio', f_prLift: 'lift' };
-    const GROWABLE_PLACEHOLDER = { f_cardio: '--', f_prLift: 'Choose a lift' };
+    const GROWABLE_PLACEHOLDER = { f_prLift: 'Choose a lift' };
 
     function showError(err) {
       const app = document.getElementById('app');
@@ -663,15 +665,15 @@
       const input = document.getElementById(fieldId + '_addInput');
       const value = input.value.trim();
       if (!value) return;
-      const kind = GROWABLE_KIND[fieldId];
-      const fnName = kind === 'cardio' ? 'addCardioType' : 'addLift';
+
+      // This is now only used for the Lift growable select (PR logging).
+      // Cardio has its own chip-based multi-select — see confirmAddNewCardioChip().
       google.script.run.withFailureHandler(showError).withSuccessHandler(function(updatedList) {
-        if (kind === 'cardio') options.cardioTypes = updatedList;
-        else options.lifts = updatedList;
+        options.lifts = updatedList;
         rebuildGrowableSelect(fieldId, updatedList, value, GROWABLE_PLACEHOLDER[fieldId]);
         input.value = '';
         document.getElementById(fieldId + '_addRow').style.display = 'none';
-      })[fnName](value);
+      }).addLift(value);
     }
 
     /* ---------- home / dashboard ---------- */
@@ -1058,8 +1060,9 @@
         }
         if (hasCardio(d)) {
           cardioDays++;
-          const c = String(d.cardio).trim();
-          cardioFreq[c] = (cardioFreq[c] || 0) + 1;
+          String(d.cardio).split(',').map(s => s.trim()).filter(Boolean).forEach(function(c) {
+            cardioFreq[c] = (cardioFreq[c] || 0) + 1;
+          });
         }
         if (typeof d.weight === 'number') weightPoints.push({ ts: d.dateSortable, weight: d.weight });
       });
@@ -1348,6 +1351,7 @@
 
     function renderForm(data) {
       selectedMuscles = data.workout.slice();
+      selectedCardio = data.cardio.slice();
 
       const chipHtml = options.muscleGroups.map(function(m) {
         const sel = selectedMuscles.indexOf(m) !== -1;
@@ -1362,7 +1366,13 @@
             '<div class="chip-group" id="muscleChips">' + chipHtml + '</div>' +
           '</div>' +
           '<div class="field"><label>Workout Notes</label><textarea id="f_workoutNotes">' + escapeHtml(data.workoutNotes) + '</textarea></div>' +
-          '<div class="field"><label>Cardio</label>' + renderSelectWithAddNew('f_cardio', options.cardioTypes, data.cardio, '--') + '</div>' +
+          '<div class="field"><label>Cardio</label>' +
+            '<div class="chip-group" id="cardioChips">' + renderCardioChipsHtml() + '</div>' +
+            '<div class="add-new-row" id="cardioChipAddRow">' +
+              '<input type="text" id="cardioChipAddInput" placeholder="Type a new value">' +
+              '<button type="button" class="btn secondary" onclick="confirmAddNewCardioChip()">Add</button>' +
+            '</div>' +
+          '</div>' +
           '<div class="field"><label>Cardio Note</label><textarea id="f_cardioNote">' + escapeHtml(data.cardioNote) + '</textarea></div>' +
           '<div class="row2">' +
             '<div class="field"><label>Miles</label><input id="f_miles" type="number" step="0.1" inputmode="decimal" value="' + escapeAttr(data.miles) + '"></div>' +
@@ -1372,6 +1382,46 @@
           '<div style="height:10px;"></div>' +
           '<button class="btn secondary" onclick="showHome()">Cancel</button>' +
         '</div>';
+    }
+
+    function renderCardioChipsHtml() {
+      const chips = options.cardioTypes.map(function(c) {
+        const sel = selectedCardio.indexOf(c) !== -1;
+        return '<div class="chip' + (sel ? ' selected' : '') + '" data-value="' + escapeAttr(c) + '" onclick="toggleCardioChip(this)">' + escapeHtml(c) + '</div>';
+      }).join('');
+      return chips + '<div class="chip chip-add" onclick="showCardioAddInput()">+ Add new</div>';
+    }
+
+    function toggleCardioChip(el) {
+      const value = el.getAttribute('data-value');
+      const idx = selectedCardio.indexOf(value);
+      if (idx === -1) selectedCardio.push(value);
+      else selectedCardio.splice(idx, 1);
+      document.querySelectorAll('#cardioChips .chip').forEach(function(chip) {
+        const v = chip.getAttribute('data-value');
+        if (v === null) return; // skip the "+ Add new" chip itself
+        chip.classList.toggle('selected', selectedCardio.indexOf(v) !== -1);
+      });
+    }
+
+    function showCardioAddInput() {
+      document.getElementById('cardioChipAddRow').style.display = 'flex';
+      document.getElementById('cardioChipAddInput').focus();
+    }
+
+    function confirmAddNewCardioChip() {
+      const input = document.getElementById('cardioChipAddInput');
+      const value = input.value.trim();
+      if (!value) return;
+      const already = options.cardioTypes.some(function(v) { return v.toLowerCase() === value.toLowerCase(); });
+      if (!already) {
+        options.cardioTypes.push(value);
+        options.cardioTypes.sort(function(a, b) { return a.localeCompare(b); });
+      }
+      if (selectedCardio.indexOf(value) === -1) selectedCardio.push(value);
+      input.value = '';
+      document.getElementById('cardioChipAddRow').style.display = 'none';
+      document.getElementById('cardioChips').innerHTML = renderCardioChipsHtml();
     }
 
     function toggleChip(el) {
@@ -1391,14 +1441,12 @@
     }
 
     function save(rowIndex) {
-      const cardioEl = document.getElementById('f_cardio');
-      const cardioVal = (cardioEl.value === '__add_new__') ? '' : cardioEl.value;
       const payload = {
         sheetName: currentSheet,
         rowIndex: rowIndex,
         workout: selectedMuscles,
         workoutNotes: document.getElementById('f_workoutNotes').value,
-        cardio: cardioVal,
+        cardio: selectedCardio,
         cardioNote: document.getElementById('f_cardioNote').value,
         miles: document.getElementById('f_miles').value,
         weight: document.getElementById('f_weight').value

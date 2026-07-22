@@ -608,6 +608,55 @@
       return { miles, liftDays, cardioDays, latestWeight, latestWeightDate };
     }
 
+    /**
+     * An "active" day is one with a lift and/or cardio entry (not just a
+     * logged bodyweight or note). Current streak counts backward from today;
+     * if today hasn't been logged yet, it checks yesterday instead so the
+     * streak doesn't look broken before the day is even over. Best streak
+     * scans the full history for the longest run of consecutive active days.
+     */
+    function computeStreaks() {
+      // Converts a timestamp to a plain calendar-day integer that increments
+      // by exactly 1 per day, with no DST wobble — millisecond-diffing two
+      // local midnights breaks across a DST transition (that day isn't
+      // exactly 24h in absolute time), so day-number arithmetic is used
+      // instead of epoch-time arithmetic.
+      function toDayNumber(ts) {
+        const dt = new Date(ts);
+        return Math.floor(Date.UTC(dt.getFullYear(), dt.getMonth(), dt.getDate()) / 86400000);
+      }
+
+      const activeSet = new Set(
+        dayList
+          .filter(function(d) { return hasWorkout(d) || hasCardio(d); })
+          .map(function(d) { return toDayNumber(d.dateSortable); })
+      );
+
+      // Current streak
+      const todayNum = toDayNumber(Date.now());
+      let cursor = todayNum;
+      if (!activeSet.has(cursor)) {
+        cursor -= 1; // today not logged yet — see if the streak is still alive as of yesterday
+      }
+      let current = 0;
+      while (activeSet.has(cursor)) {
+        current++;
+        cursor -= 1;
+      }
+
+      // Best streak ever (longest run of consecutive active days)
+      const uniqueSorted = Array.from(activeSet).sort(function(a, b) { return a - b; });
+      let best = 0, run = 0, prevNum = null;
+      uniqueSorted.forEach(function(n) {
+        run = (prevNum !== null && n - prevNum === 1) ? run + 1 : 1;
+        if (run > best) best = run;
+        prevNum = n;
+      });
+      best = Math.max(best, current);
+
+      return { current: current, best: best };
+    }
+
     function computeMonthStats(monthDate) {
       const y = monthDate.getFullYear(), m = monthDate.getMonth();
       let miles = 0, liftDays = 0, cardioDays = 0, weightSum = 0, weightCount = 0;
@@ -739,6 +788,20 @@
         '<div class="stat-tile green"><div class="v">' + ws.cardioDays + '</div><div class="l">Cardio Days</div></div>' +
         '<div class="stat-tile"><div class="v">' + (ws.latestWeight !== null ? ws.latestWeight : '--') + '</div><div class="l">' + (ws.latestWeightDate ? 'Weight (' + formatMDY(ws.latestWeightDate) + ')' : 'Latest Weight') + '</div></div>';
       app.appendChild(grid);
+
+      // Activity streak
+      const streaks = computeStreaks();
+      const streakTitle = document.createElement('div');
+      streakTitle.className = 'section-title';
+      streakTitle.textContent = 'Activity Streak';
+      app.appendChild(streakTitle);
+
+      const streakGrid = document.createElement('div');
+      streakGrid.className = 'stat-grid';
+      streakGrid.innerHTML =
+        '<div class="stat-tile orange"><div class="v">' + streaks.current + '</div><div class="l">Day Streak</div></div>' +
+        '<div class="stat-tile"><div class="v">' + streaks.best + '</div><div class="l">Best Streak</div></div>';
+      app.appendChild(streakGrid);
 
       // Calendar
       renderCalendarSection(app);

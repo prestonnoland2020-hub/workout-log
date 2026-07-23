@@ -24,6 +24,8 @@
       --cream: #F6F1E7;
       --ink: #2A2119;
       --ink-soft: #6B6259;
+      --success: #27863F;
+      --decline: #A63D2E;
       --surface: #FFFFFF;
       --faint: #CFC9BE;
       --shadow-tint: 0,0,0;
@@ -1163,33 +1165,145 @@
       }).join('');
     }
 
+    /**
+     * Rounds a raw axis step up to a "nice" human-friendly increment
+     * (1/2/2.5/5/10 x a power of ten) — the same approach standard charting
+     * libraries use, so gridlines land on round numbers like 25/50/100
+     * instead of awkward values like 33.7.
+     */
+    function niceAxisStep(rawStep) {
+      const mag = Math.pow(10, Math.floor(Math.log10(rawStep)));
+      const norm = rawStep / mag;
+      let niceNorm;
+      if (norm <= 1) niceNorm = 1;
+      else if (norm <= 2) niceNorm = 2;
+      else if (norm <= 2.5) niceNorm = 2.5;
+      else if (norm <= 5) niceNorm = 5;
+      else niceNorm = 10;
+      return niceNorm * mag;
+    }
+
+    let __chartGradCounter = 0;
+
+    /**
+     * Builds a smooth path through a series of {x,y} points using quadratic
+     * Bezier curves (control point = the actual data point, curve endpoints
+     * = midpoints between consecutive points). This is a standard lightweight
+     * smoothing trick — no charting library needed, just a nicer curve than
+     * straight polyline segments.
+     */
+    /**
+     * Plain straight-segment path — used instead of smoothPathD for dense,
+     * noisy datasets (e.g. daily bodyweight). Smoothing + per-point dots
+     * looks great for sparse data like PRs, but on dozens of noisy daily
+     * points the smoothing exaggerates every small wiggle into an
+     * amplified-looking swing, and the dots turn into visual clutter.
+     */
+    function straightPathD(points) {
+      return 'M ' + points.map(function(p) { return p.x + ',' + p.y; }).join(' L ');
+    }
+
+    function smoothPathD(points) {
+      let d = 'M ' + points[0].x + ',' + points[0].y;
+      for (let i = 1; i < points.length; i++) {
+        const p = points[i];
+        const isLast = (i === points.length - 1);
+        const endX = isLast ? p.x : (p.x + points[i + 1].x) / 2;
+        const endY = isLast ? p.y : (p.y + points[i + 1].y) / 2;
+        d += ' Q ' + p.x + ',' + p.y + ' ' + endX + ',' + endY;
+      }
+      return d;
+    }
+
     function buildWeightChart(series) {
       // series: [{ label, color, points: [{ts, weight}] }]
       const allPoints = series.flatMap(s => s.points);
       if (allPoints.length < 2) return null;
-      const W = 280, H = 120, PAD = 8;
+      const W = 280, H = 130;
+      const PAD_LEFT = 24, PAD_RIGHT = 5, PAD_TOP = 8, PAD_BOTTOM = 8;
       const xs = allPoints.map(p => p.ts), ys = allPoints.map(p => p.weight);
       const minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
-      const minY = Math.min.apply(null, ys), maxY = Math.max.apply(null, ys);
-      const xSpan = (maxX - minX) || 1, ySpan = (maxY - minY) || 1;
-      function xScale(ts) { return PAD + ((ts - minX) / xSpan) * (W - 2 * PAD); }
-      function yScale(w) { return H - PAD - ((w - minY) / ySpan) * (H - 2 * PAD); }
+      const rawMinY = Math.min.apply(null, ys), rawMaxY = Math.max.apply(null, ys);
 
-      let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%; height:140px;">';
+      // Real, readable scale: round the axis to a nice step and snap the
+      // min/max to that grid, rather than just plotting between the raw
+      // data's min/max (which shows no reference points to gauge scale by).
+      const TICK_COUNT = 4;
+      const rawSpan = (rawMaxY - rawMinY) || 1;
+      const step = niceAxisStep(rawSpan / TICK_COUNT);
+      const niceMin = Math.floor(rawMinY / step) * step;
+      const niceMax = Math.ceil(rawMaxY / step) * step;
+      const ticks = [];
+      for (let v = niceMin; v <= niceMax + step * 0.001; v += step) ticks.push(Math.round(v * 10) / 10);
+
+      const xSpan = (maxX - minX) || 1, ySpan = (niceMax - niceMin) || 1;
+      function xScale(ts) { return PAD_LEFT + ((ts - minX) / xSpan) * (W - PAD_LEFT - PAD_RIGHT); }
+      function yScale(w) { return H - PAD_BOTTOM - ((w - niceMin) / ySpan) * (H - PAD_TOP - PAD_BOTTOM); }
+
+      // Unique per call — gradient IDs live in one shared document-wide
+      // namespace, and this page can show more than one of these charts
+      // at once (Weight Trend + PR Progress both on the Insights page).
+      const gradId = 'chartGrad' + (__chartGradCounter++);
+
+      let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" style="width:100%; height:150px; display:block;">';
+
+      // Horizontal gridlines + value labels, so the scale is actually readable
+      ticks.forEach(function(t) {
+        const y = yScale(t);
+        svg += '<line x1="' + PAD_LEFT + '" y1="' + y + '" x2="' + (W - PAD_RIGHT) + '" y2="' + y + '" stroke="var(--blush-light)" stroke-width="1"/>';
+        svg += '<text x="' + (PAD_LEFT - 6) + '" y="' + (y + 3) + '" font-size="9" text-anchor="end" fill="var(--ink-soft)">' + t + '</text>';
+      });
+
+      // Gradient area fill only makes sense for a single series — two
+      // overlapping semi-transparent fills (Compare mode) just look muddy.
+      if (series.length === 1 && series[0].points.length >= 2) {
+        svg += '<defs><linearGradient id="' + gradId + '" x1="0" y1="0" x2="0" y2="1">' +
+          '<stop offset="0%" stop-color="' + series[0].color + '" stop-opacity="0.28"/>' +
+          '<stop offset="100%" stop-color="' + series[0].color + '" stop-opacity="0"/>' +
+          '</linearGradient></defs>';
+      }
+
       series.forEach(function(s) {
         if (s.points.length < 2) return;
-        const pts = s.points.map(p => xScale(p.ts) + ',' + yScale(p.weight)).join(' ');
-        svg += '<polyline points="' + pts + '" fill="none" stroke="' + s.color + '" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
-        const last = s.points[s.points.length - 1];
-        svg += '<circle cx="' + xScale(last.ts) + '" cy="' + yScale(last.weight) + '" r="3.5" fill="' + s.color + '"/>';
+        const pts = s.points.map(function(p) { return { x: xScale(p.ts), y: yScale(p.weight) }; });
+        const isDense = pts.length > 20;
+        const lineD = isDense ? straightPathD(pts) : smoothPathD(pts);
+
+        if (series.length === 1) {
+          const areaD = lineD + ' L ' + pts[pts.length - 1].x + ',' + (H - PAD_BOTTOM) + ' L ' + pts[0].x + ',' + (H - PAD_BOTTOM) + ' Z';
+          svg += '<path d="' + areaD + '" fill="url(#' + gradId + ')" stroke="none"/>';
+        }
+
+        svg += '<path d="' + lineD + '" fill="none" stroke="' + s.color + '" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+
+        if (isDense) {
+          // Only mark the current value — a dot per day would just be noise.
+          const last = pts[pts.length - 1];
+          svg += '<circle cx="' + last.x + '" cy="' + last.y + '" r="7" fill="' + s.color + '" opacity="0.18"/>';
+          svg += '<circle cx="' + last.x + '" cy="' + last.y + '" r="4" fill="' + s.color + '" stroke="var(--surface)" stroke-width="1.5"/>';
+        } else {
+          pts.forEach(function(p, i) {
+            if (i === pts.length - 1) {
+              svg += '<circle cx="' + p.x + '" cy="' + p.y + '" r="7" fill="' + s.color + '" opacity="0.18"/>';
+              svg += '<circle cx="' + p.x + '" cy="' + p.y + '" r="4" fill="' + s.color + '" stroke="var(--surface)" stroke-width="1.5"/>';
+            } else {
+              svg += '<circle cx="' + p.x + '" cy="' + p.y + '" r="2.4" fill="' + s.color + '"/>';
+            }
+          });
+        }
       });
       svg += '</svg>';
 
-      const lowLabel = minY.toFixed(1), highLabel = maxY.toFixed(1);
-      svg = '<div style="display:flex; justify-content:space-between; font-size:10px; color:var(--ink-soft); margin-bottom:2px;"><span>' + highLabel + '</span></div>' +
-            svg +
-            '<div style="display:flex; justify-content:space-between; font-size:10px; color:var(--ink-soft); margin-top:2px;"><span>' + lowLabel + '</span></div>';
-      return svg;
+      // 3 evenly time-spaced date labels (start/middle/end) instead of just endpoints
+      const midX = minX + (maxX - minX) / 2;
+      const dateLabels = [minX, midX, maxX].map(function(ts) {
+        return new Date(ts).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+      });
+
+      return svg +
+        '<div style="display:flex; justify-content:space-between; font-size:10px; color:var(--ink-soft); margin-top:4px; padding-top:6px; border-top:1px solid var(--cream);">' +
+          '<span>' + dateLabels[0] + '</span><span>' + dateLabels[1] + '</span><span>' + dateLabels[2] + '</span>' +
+        '</div>';
     }
 
     function renderKpis() {
@@ -1365,6 +1479,7 @@
 
       const liftEntries = prList
         .filter(function(p) { return p.lift === selectedLift; })
+        .filter(function(p) { return p.dateSortable >= bounds.start && p.dateSortable <= bounds.end; })
         .slice()
         .sort(function(a, b) { return a.dateSortable - b.dateSortable; });
 
@@ -1384,21 +1499,43 @@
           '<div class="seg-btn' + (selectedMode === 'calculated' ? ' active' : '') + '" onclick="onPrGraphModeChange(\'calculated\')">Calculated Max</div>' +
         '</div>';
 
-      const latestEntry = filteredEntries.length ? filteredEntries[filteredEntries.length - 1] : null;
+      // Favor whichever entry produced the highest calculated value within
+      // the selected range, not just whatever was logged most recently —
+      // a peak earlier in the window is still the real PR for that window
+      // even if a later attempt in the same window was lower.
+      let bestEntry = null, bestCalc = -Infinity;
+      filteredEntries.forEach(function(p) {
+        const calc = estimatedOneRepMax(p.weight, p.reps);
+        if (calc > bestCalc) { bestCalc = calc; bestEntry = p; }
+      });
+
+      // Growth/decline across the selected range: first vs last entry within
+      // it (filteredEntries is already scoped to bounds + mode above), same
+      // convention as the bodyweight trend's existing +/- change indicator.
+      let deltaHtml = '';
+      if (filteredEntries.length >= 2) {
+        const firstCalc = estimatedOneRepMax(filteredEntries[0].weight, filteredEntries[0].reps);
+        const lastCalc = estimatedOneRepMax(filteredEntries[filteredEntries.length - 1].weight, filteredEntries[filteredEntries.length - 1].reps);
+        const change = Math.round((lastCalc - firstCalc) * 10) / 10;
+        const changeColor = change > 0 ? 'var(--success)' : (change < 0 ? 'var(--decline)' : 'var(--ink-soft)');
+        const changeText = change === 0 ? 'No change' : ((change > 0 ? '+' : '') + change + ' lb');
+        deltaHtml = '<div class="sub" style="color:' + changeColor + '; font-weight:700; margin-top:4px;">' + changeText + ' &middot; ' + escapeHtml(rangeLabel(kpiRange)) + '</div>';
+      }
+
       let kpiHtml = '';
-      if (latestEntry) {
-        const calcMax = Math.round(estimatedOneRepMax(latestEntry.weight, latestEntry.reps) * 10) / 10;
-        const repsLabel = (latestEntry.reps && latestEntry.reps > 1) ? ('&times;' + latestEntry.reps + ' reps &middot; ') : '';
+      if (bestEntry) {
+        const calcMax = Math.round(bestCalc * 10) / 10;
+        const repsLabel = (bestEntry.reps && bestEntry.reps > 1) ? ('&times;' + bestEntry.reps + ' reps &middot; ') : '';
         kpiHtml =
           '<div class="kpi-grid" style="margin-top:12px;">' +
-            '<div class="kpi-tile"><div class="v">' + latestEntry.weight + ' lb</div><div class="l">Weight Lifted</div><div class="sub">' + repsLabel + latestEntry.dateLabel + '</div></div>' +
-            '<div class="kpi-tile gold"><div class="v">' + calcMax + ' lb</div><div class="l">Calculated Max</div><div class="sub">' + latestEntry.dateLabel + '</div></div>' +
+            '<div class="kpi-tile"><div class="v">' + bestEntry.weight + ' lb</div><div class="l">Weight Lifted</div><div class="sub">' + repsLabel + bestEntry.dateLabel + '</div></div>' +
+            '<div class="kpi-tile gold"><div class="v">' + calcMax + ' lb</div><div class="l">Calculated Max</div><div class="sub">' + bestEntry.dateLabel + '</div>' + deltaHtml + '</div>' +
           '</div>';
       }
 
       const emptyMsg = (selectedMode === '1rm')
-        ? 'No true 1-rep-max entries logged for this lift yet. Try "Calculated Max" to include multi-rep sets, or log a straight 1-rep PR.'
-        : 'Log at least 2 PRs for this lift to see a trend.';
+        ? 'No true 1-rep-max entries for ' + escapeHtml(selectedLift) + ' logged in ' + escapeHtml(rangeLabel(kpiRange)) + '. Try "Calculated Max" to include multi-rep sets, or a different range.'
+        : 'No PRs logged for ' + escapeHtml(selectedLift) + ' in ' + escapeHtml(rangeLabel(kpiRange)) + '. Try a wider range like "All Time".';
 
       progressCard.innerHTML =
         '<div class="section-title" style="margin-top:0;">PR Progress</div>' +
